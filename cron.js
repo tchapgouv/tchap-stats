@@ -1,6 +1,6 @@
-const cron = require("cron")
+//const cron = require("cron")
 
-const job =
+/*const job =
   {
     cronTime: "* * * * *", // every minute
     onTick: fetchFromS3,
@@ -17,7 +17,10 @@ if (job.isActive) {
 } else {
   console.log(`❌ The job "${job.name}" is OFF`)
 }
+*/
 
 const fetchFromS3 = () => {
   console.log("Coucou !!!!!")
 }
+
+fetchFromS3()
