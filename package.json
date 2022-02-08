@@ -6,6 +6,5 @@
   "scripts": {
   },
   "dependencies": {
-    "express": "^4.11.2"
   }
 }
