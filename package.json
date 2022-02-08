@@ -1,0 +1,12 @@
+{
+  "name": "tchap-stats",
+  "version": "0.1.0",
+  "description": "Tchap stats",
+  "license": "MIT",
+  "scripts": {
+    "start": "node emptyApp.js"
+  },
+  "dependencies": {
+    "express": "^4.11.2"
+  }
+}
