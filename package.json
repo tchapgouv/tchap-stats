@@ -1,0 +1,10 @@
+{
+  "name": "tchap-stats",
+  "version": "0.1.0",
+  "description": "Tchap stats",
+  "license": "MIT",
+  "scripts": {
+  },
+  "dependencies": {
+  }
+}
