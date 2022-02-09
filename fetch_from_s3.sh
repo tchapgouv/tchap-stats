@@ -27,3 +27,12 @@ curl -k -X GET -o "${file_to_download}"\
   -H "Content-Type: ${contentType}" \
   -H "Authorization: AWS ${S3_ACCESS_KEY_ID}:${signature_hash}" \
   $destination
+
+# TODO create table subscriptions_aggregate if not present
+# CREATE TABLE subscriptions_aggregate (subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR
+
+# Insert into DB
+# Note : DATABASE_URL is automatically created on scalingo machines.
+psql -d $DATABASE_URL -c "\copy subscriptions_aggregate(subscriptions, domain, hour, instance) FROM '/app/subscriptions_aggregate_example.csv' DELIMITER ',' CSV HEADER;"
+
+echo "Done !"
