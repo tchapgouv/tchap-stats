@@ -7,7 +7,9 @@ CREATE TEMPORARY TABLE subscriptions_aggregate_temp (subscriptions INTEGER, doma
 /* TODO : ON should use multiple fields (or an id that we generate from the multiple fields ? ) */
 MERGE INTO subscriptions_aggregate main
 USING subscriptions_aggregate_temp temp
-ON main.hour || main.domain || main.instance = temp.hour || temp.domain || temp.instance
+-- ON main.hour || main.domain || main.instance = temp.hour || temp.domain || temp.instance
+-- ON (main.hour, main.domain, main.instance) = (temp.hour, temp.domain, temp.instance)
+ON main.hour = temp.hour
 WHEN MATCHED THEN
     DO NOTHING
 WHEN NOT MATCHED THEN
