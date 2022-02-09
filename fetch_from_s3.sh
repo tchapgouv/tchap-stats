@@ -31,7 +31,7 @@ curl -k -X GET -o "${filename}"\
 #### Now insert into DB
 
 # Note : DATABASE_URL is automatically created on scalingo machines.
-psql -d $DATABASE_URL -f insert_data.sql -v filename=$filename
+psql -d $DATABASE_URL -f insert_data.sql -v filepath="/app/$filename"
 # todo : can also try --set=filename="$filename"
 
 echo "Done !"
