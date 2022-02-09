@@ -31,9 +31,7 @@ curl -k -X GET -o "${filename}"\
 #### Now insert into DB
 
 # Note : DATABASE_URL is automatically created on scalingo machines.
-psql -d $DATABASE_URL -c "CREATE TABLE IF NOT EXISTS subscriptions_aggregate (subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR);"
-
-# Insert into DB
-psql -d $DATABASE_URL -c "\copy subscriptions_aggregate(subscriptions, domain, hour, instance) FROM '/app/subscriptions_aggregate_example.csv' DELIMITER ',' CSV HEADER;"
+psql -d $DATABASE_URL -f insert_data.sql -v filename=$filename
+# todo : can also try --set=filename="$filename"
 
 echo "Done !"
