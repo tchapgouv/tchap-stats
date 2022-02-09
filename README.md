@@ -9,3 +9,6 @@ To run on scalingo, since there is no webapp, you need to scale the web containe
 See doc in https://doc.scalingo.com/platform/app/web-less-app
 
 You may need to first create a dummy app to get the scalingo machine up (see [this commit](https://github.com/tchapgouv/tchap-stats/commit/ad9ab080922d8150e69dc224b87562898038f6b8)), then scale the web container to zero, then remove the dummy app.
+
+## Create tables
+```CREATE TABLE subscriptions_aggregate (id INTEGER PRIMARY KEY, subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR);```
