@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Fetch the csv file of stats from S3 bucket.
+### Fetch the csv file of stats from S3 bucket.
 
 file_to_download=$1
 echo "file to download : $file_to_download"
@@ -28,8 +28,9 @@ curl -k -X GET -o "${file_to_download}"\
   -H "Authorization: AWS ${S3_ACCESS_KEY_ID}:${signature_hash}" \
   $destination
 
-# TODO create table subscriptions_aggregate if not present
-# CREATE TABLE subscriptions_aggregate (subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR
+#### Now insert into DB
+
+CREATE TABLE IF NOT EXISTS subscriptions_aggregate (subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR);
 
 # Insert into DB
 # Note : DATABASE_URL is automatically created on scalingo machines.
