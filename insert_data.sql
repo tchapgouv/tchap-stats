@@ -1,9 +1,14 @@
-/* File path should be passed from args */
+/* Insert data from the csv file into the DB. Some of the data will be already present in the DB, so we use a MERGE. */
 
-DROP TABLE IF EXISTS subscriptions_aggregate_temp; 
-/* TODO use temp table */
-CREATE TABLE subscriptions_aggregate_temp (subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR);
+CREATE TEMPORARY TABLE subscriptions_aggregate_temp (subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR);
 
-\copy subscriptions_aggregate_temp(subscriptions, domain, hour, instance) FROM '/app/subscriptions_aggregate_2022-02-09.csv' DELIMITER ',' CSV HEADER;
+\copy subscriptions_aggregate_temp(subscriptions, domain, hour, instance) FROM '/app/subscriptions_aggregate.csv' DELIMITER ',' CSV HEADER;
 
-SELECT merge_tables(subscriptions_aggregate, subscriptions_aggregate_temp);
+/* TODO : ON should use multiple fields (or an id that we generate from the multiple fields ? ) */
+MERGE INTO subscriptions_aggregate main
+USING subscriptions_aggregate_temp temp
+ON main.hour || main.domain || main.instance = temp.hour || temp.domain || temp.instance
+WHEN MATCHED THEN
+    DO NOTHING
+WHEN NOT MATCHED THEN
+    INSERT VALUES (subscriptions, domain, hour, instance);

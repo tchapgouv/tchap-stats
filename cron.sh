@@ -4,7 +4,6 @@
 
 ## Set up DB
 psql -d $DATABASE_URL -f tables.sql
-psql -d $DATABASE_URL -f functions.sql
 
 #### Now insert into DB
 

@@ -28,4 +28,5 @@ curl -k -X GET -o "${filename}"\
   -H "Authorization: AWS ${S3_ACCESS_KEY_ID}:${signature_hash}" \
   $destination
 
-
+# Copy file to final place, ready to be inserted into DB
+cp $filename ${filename_without_extension}.csv
