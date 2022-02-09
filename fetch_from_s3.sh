@@ -2,13 +2,13 @@
 
 ### Fetch the csv file of stats from S3 bucket.
 
-file_to_download=$1
-echo "file to download : $file_to_download"
-
-filename=${file_to_download##*/}
+filename_without_extension="subscriptions_aggregate"
+today=`date +'%Y-%m-%d'`
+filename=${filename_without_extension}_${today}.csv
+echo "file to download : $filename"
 
 bucket="tchap-stats-metabase"
-s3path="/${bucket}/${file_to_download}"
+s3path="/${bucket}/${filename}"
 
 # metadata
 contentType="text/csv"
@@ -22,7 +22,7 @@ destination="https://tchap-stats-metabase.s3.gra.cloud.ovh.net/${filename}"
 echo $destination
 
 # actual curl command to do GET operation on s3
-curl -k -X GET -o "${file_to_download}"\
+curl -k -X GET -o "${filename}"\
   -H "Date: ${dateValue}" \
   -H "Content-Type: ${contentType}" \
   -H "Authorization: AWS ${S3_ACCESS_KEY_ID}:${signature_hash}" \

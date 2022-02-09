@@ -1,7 +1,7 @@
 {
   "jobs": [
     {
-      "command": "*/10 * * * * ./fetch_from_s3.sh subscriptions_aggregate_example.csv"
+      "command": "*/10 * * * * ./fetch_from_s3.sh"
     }
   ]
 }
