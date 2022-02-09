@@ -28,10 +28,4 @@ curl -k -X GET -o "${filename}"\
   -H "Authorization: AWS ${S3_ACCESS_KEY_ID}:${signature_hash}" \
   $destination
 
-#### Now insert into DB
 
-# Note : DATABASE_URL is automatically created on scalingo machines.
-psql -d $DATABASE_URL -f insert_data.sql -v filepath="/app/$filename"
-# todo : can also try --set=filename="$filename"
-
-echo "Done !"
