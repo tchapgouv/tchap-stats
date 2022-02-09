@@ -1,7 +1,7 @@
 {
   "jobs": [
     {
-      "command": "*/10 * * * * node cron.js"
+      "command": "*/10 * * * * ./fetch_from_s3.sh"
     }
   ]
 }
