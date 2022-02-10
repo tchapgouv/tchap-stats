@@ -3,11 +3,13 @@
 CREATE TEMPORARY TABLE subscriptions_aggregate_temp (subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR);
 
 \copy subscriptions_aggregate_temp(subscriptions, domain, hour, instance) FROM '/app/subscriptions_aggregate.csv' DELIMITER ',' CSV HEADER;
+-- \copy subscriptions_aggregate_temp(subscriptions, domain, hour, instance) FROM './subscriptions_aggregate.csv' DELIMITER ',' CSV HEADER;
+
 
 INSERT INTO subscriptions_aggregate
 SELECT *
 FROM subscriptions_aggregate_temp
-ON CONFLICT (domain, hour, instance) DO NOTHING
+ON CONFLICT DO NOTHING
 
 -- /* TODO : ON should use multiple fields (or an id that we generate from the multiple fields ? ) */
 -- MERGE INTO subscriptions_aggregate main
