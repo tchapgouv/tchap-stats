@@ -1,1 +1,2 @@
-CREATE TABLE IF NOT EXISTS subscriptions_aggregate (subscriptions INTEGER, domain VARCHAR, hour timestamp  with time zone, instance VARCHAR);
+CREATE TABLE IF NOT EXISTS subscriptions_aggregate (subscriptions INTEGER, domain VARCHAR, hour timestamp with time zone, instance VARCHAR);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_stats ON subscriptions_aggregate (domain, hour, instance)

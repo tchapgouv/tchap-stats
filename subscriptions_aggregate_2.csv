@@ -1,4 +1,4 @@
 subscriptions,domain,hour,instance
-1234,carotte,2022-02-08 13:00:00,agriculture
-83,betterave,2022-02-08 14:00:00,social
-999,choufleur,2022-02-00 15:00:00,social
+1234,carotte,2022-02-08 13:00:00 +02:00,agriculture
+83,betterave,2022-02-08 14:00:00 +02:00,social
+999,choufleur,2022-02-08 15:00:00 +02:00,social
