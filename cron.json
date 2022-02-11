@@ -1,7 +1,7 @@
 {
   "jobs": [
     {
-      "command": "*/10 * * * * ./cron.sh"
+      "command": "* 6 * * * ./cron.sh"
     }
   ]
 }
