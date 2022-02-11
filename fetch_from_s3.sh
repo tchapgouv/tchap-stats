@@ -33,4 +33,6 @@ curl -k -X GET -o "${filename}"\
 # Copy file to final place, ready to be inserted into DB
 cp $filename ${filename_without_extension}.csv
 
-echo "Done with fetch_from_s3 $filename_without_extension $today"
+numlines=`wc -l ${filename_without_extension}.csv`
+
+echo "Done with fetch_from_s3 $filename_without_extension $today - number of lines $numlines"
