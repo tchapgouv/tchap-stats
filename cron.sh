@@ -1,17 +1,23 @@
 #!/bin/bash
 
-DATABASE_URL=${DATABASE_URL:-'postgresql://stats:stats@localhost:5432/stats'}
+# Note : DATABASE_URL is automatically created on scalingo machines.
+# For testing :
+# DATABASE_URL=${DATABASE_URL:-'postgresql://stats:stats@localhost:5432/stats'}
+# echo $DATABASE_URL
+echo "Starting job. Should display 'Done' when done, if there were no errors."
 
-/bin/bash fetch_from_s3.sh
+today=`date +'%Y-%m-%d'`
+echo $today
 
-echo $DATABASE_URL
+time ./fetch_from_s3.sh subscriptions_aggregate $today
+time ./fetch_from_s3.sh events_aggregate $today
+
 ## Set up DB
 psql -d $DATABASE_URL -f tables.sql
 
 #### Now insert into DB
 
-# Note : DATABASE_URL is automatically created on scalingo machines.
-psql -d $DATABASE_URL --set=filepath="/app/$filename" -f insert_data.sql 
-# other syntax ? -v filepath="/app/$filename"
+time psql -d $DATABASE_URL -f insert_subscriptions_data.sql
+time psql -d $DATABASE_URL -f insert_events_data.sql
 
 echo "Done !"

@@ -1,9 +1,11 @@
 #!/bin/bash
 
 ### Fetch the csv file of stats from S3 bucket.
+echo "Start fetch_from_s3.sh"
 
-filename_without_extension="subscriptions_aggregate"
-today=`date +'%Y-%m-%d'`
+# Get filename from argument
+filename_without_extension=$1
+today=$2
 filename=${filename_without_extension}_${today}.csv
 echo "file to download : $filename"
 
@@ -30,3 +32,5 @@ curl -k -X GET -o "${filename}"\
 
 # Copy file to final place, ready to be inserted into DB
 cp $filename ${filename_without_extension}.csv
+
+echo "Done with fetch_from_s3 $filename_without_extension $today"
