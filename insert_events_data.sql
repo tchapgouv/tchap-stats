@@ -2,7 +2,7 @@
 
 CREATE TEMPORARY TABLE events_aggregate_temp (events INTEGER, domain VARCHAR, hour timestamp with time zone, instance VARCHAR, type VARCHAR);
 
-\copy events_aggregate_temp(events, domain, hour, instance, type) FROM '/app/events_aggregate.csv' DELIMITER ',' CSV HEADER;
+\copy events_aggregate_temp(events, type, domain, hour, instance) FROM '/app/events_aggregate.csv' DELIMITER ',' CSV HEADER;
 
 INSERT INTO events_aggregate
 SELECT *
