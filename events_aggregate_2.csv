@@ -1,3 +1,3 @@
 events,type,domain,hour,instance
 3,m.room.create,matrix.org,2018-11-21 12:00:00+01,intradef
-8,m.room.encrypted,matrix.org,2018-11-21 12:00:00+01,intradef
+3,m.room.encryption,matrix.org,2018-11-21 12:00:00+01,intradef
