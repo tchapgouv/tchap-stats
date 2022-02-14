@@ -2,6 +2,8 @@
 
 CREATE TEMPORARY TABLE events_aggregate_temp (events INTEGER, domain VARCHAR, hour timestamp with time zone, instance VARCHAR, type VARCHAR);
 
+-- CSV file has fields in this order : events,type,domain,hour,instance
+-- If it changes, change this line or it will break.
 \copy events_aggregate_temp(events, type, domain, hour, instance) FROM '/app/events_aggregate.csv' DELIMITER ',' CSV HEADER;
 
 INSERT INTO events_aggregate
