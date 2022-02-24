@@ -16,3 +16,6 @@ CREATE TABLE IF NOT EXISTS events_aggregate (
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS unique_events_idx ON events_aggregate (domain, hour, instance, type);
+
+-- Index on event datetime, increasing select performance
+CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON events_aggregate (hour);
