@@ -21,3 +21,4 @@ time psql -d $DATABASE_URL -f insert_subscriptions_data.sql
 time psql -d $DATABASE_URL -f insert_events_data.sql
 
 echo "Done !"
+
