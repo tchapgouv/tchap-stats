@@ -1,7 +1,7 @@
 {
   "jobs": [
     {
-      "command": "0 8 * * * ./cron.sh",
+      "command": "0 5 * * * ./cron.sh",
       "comments": "Cron job runs at 5:00AM UTC every day"
     }
   ]
