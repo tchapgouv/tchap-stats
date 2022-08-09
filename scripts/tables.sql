@@ -30,5 +30,5 @@ CREATE TABLE IF NOT EXISTS user_daily_visits_aggregate (
   visit_ts timestamp with time zone NOT NULL
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_connections_idx ON user_daily_connections_aggregate (domain, visit_ts, instance);
-CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON user_daily_connections_aggregate (visit_ts);
+CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_connections_idx ON user_daily_visits_aggregate (domain, visit_ts, instance);
+CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON user_daily_visits_aggregate (visit_ts);
