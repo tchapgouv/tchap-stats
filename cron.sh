@@ -14,12 +14,12 @@ time ./fetch_from_s3.sh events_aggregate $today
 time ./fetch_from_s3.sh user_daily_visits_aggregate $today
 
 ## Set up DB
-psql -d $DATABASE_URL -f tables.sql
+psql -d $DATABASE_URL -f scripts/tables.sql
 
 #### Now insert into DB
-time psql -d $DATABASE_URL -f insert_subscriptions_data.sql
-time psql -d $DATABASE_URL -f insert_events_data.sql
-time psql -d $DATABASE_URL -f insert_user_daily_visits_data.sql
+time psql -d $DATABASE_URL -f scripts/insert_subscriptions_data.sql
+time psql -d $DATABASE_URL -f scripts/insert_events_data.sql
+time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
 
 echo "Done !"
 
