@@ -1,0 +1,33 @@
+{
+  "name": "Stats - Import",
+  "description": "Import statistics into metabase database from csv extract",
+  "repository": "https://github.com/tchapgouv/tchap-stats",
+  "env": {
+    "S3_BUCKET_NAME": {
+      "description": "S3 Bucket name",
+      "value": "tchap-stats-metabase-preprod",
+      "required": false
+    },
+    "S3_ACCESS_KEY_ID": {
+      "description": "S3 Access Id",
+      "value": "",
+      "required": false
+    },
+    "S3_SECRET_ACCESS_KEY": {
+      "description": "admin password",
+      "value": "",
+      "required": false
+    },
+    "DATABASE_URL": {
+      "description": "database url",
+      "value": "$SCALINGO_POSTGRESQL_URL"
+    }
+  },
+  "addons": ["postgresql:postgresql-starter"],
+  "formation": {
+    "web": {
+      "amount": 0,
+      "size": "S"
+    }
+  }
+}
