@@ -25,7 +25,6 @@ CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON events_aggregate (ho
 /** User Daily Visits **/
 CREATE TABLE IF NOT EXISTS user_daily_visits (
   user_id VARCHAR NOT NULL,
-  visits INTEGER NOT NULL,
   user_agent VARCHAR NOT NULL,
   device_id VARCHAR NOT NULL,
   domain VARCHAR NOT NULL,
