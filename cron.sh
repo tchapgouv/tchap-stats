@@ -11,7 +11,7 @@ echo $today
 
 time ./fetch_from_s3.sh subscriptions_aggregate $today
 time ./fetch_from_s3.sh events_aggregate $today
-time ./fetch_from_s3.sh user_daily_visits_aggregate $today
+time ./fetch_from_s3.sh user_daily_visits $today
 
 ## Set up DB
 psql -d $DATABASE_URL -f scripts/tables.sql

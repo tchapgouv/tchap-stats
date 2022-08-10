@@ -23,12 +23,15 @@ CREATE UNIQUE INDEX IF NOT EXISTS unique_events_idx ON events_aggregate (domain,
 CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON events_aggregate (hour);
 
 /** User Daily Visits **/
-CREATE TABLE IF NOT EXISTS user_daily_visits_aggregate (
+CREATE TABLE IF NOT EXISTS user_daily_visits (
+  user_id VARCHAR NOT NULL,
   visits INTEGER NOT NULL,
+  user_agent VARCHAR NOT NULL,
+  device_id VARCHAR NOT NULL,
   domain VARCHAR NOT NULL,
   instance VARCHAR NOT NULL,
   visit_ts timestamp with time zone NOT NULL
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_connections_idx ON user_daily_visits_aggregate (domain, visit_ts, instance);
-CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON user_daily_visits_aggregate (visit_ts);
+-- CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_connections_idx ON user_daily_visits (domain, visit_ts, instance);
+-- CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON user_daily_visits (visit_ts);
