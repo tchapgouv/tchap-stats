@@ -1,4 +1,7 @@
 #!/bin/bash
+# Command : 
+# - ./cron 
+# - ./cron 2022-08-10 (to execute the script with a different date)
 
 # Note : DATABASE_URL is automatically created on scalingo machines.
 # For testing :
@@ -6,12 +9,17 @@
 # echo $DATABASE_URL
 echo "Starting job. Should display 'Done' when done, if there were no errors."
 
-today=`date +'%Y-%m-%d'`
-echo $today
+extract_date=$1 # date format ie. 2022-08-10
+if [ -z "$extract_date" ]
+then
+      extract_date=`date +'%Y-%m-%d'`
+fi
 
-time ./fetch_from_s3.sh subscriptions_aggregate $today
-time ./fetch_from_s3.sh events_aggregate $today
-time ./fetch_from_s3.sh user_daily_visits $today
+echo $extract_date
+
+time ./fetch_from_s3.sh subscriptions_aggregate $extract_date
+time ./fetch_from_s3.sh events_aggregate $extract_date
+time ./fetch_from_s3.sh user_daily_visits $extract_date
 
 ## Set up DB
 psql -d $DATABASE_URL -f scripts/tables.sql
