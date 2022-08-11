@@ -1,7 +1,7 @@
 #!/bin/bash
 # Command : 
-# - ./cron 
-# - ./cron 2022-08-10 (to execute the script with a different date)
+# - ./sync_stats.sh 
+# - ./sync_stats.sh 2022-08-10 (to execute the script with a different date)
 
 # Note : DATABASE_URL is automatically created on scalingo machines.
 # For testing :
