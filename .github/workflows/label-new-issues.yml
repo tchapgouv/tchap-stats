@@ -10,6 +10,7 @@ on:
       - opened
 jobs:
   label_issue:
+    name: Add 'stats' label
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v5
@@ -21,3 +22,11 @@ jobs:
               repo: context.repo.repo,
               labels: ['stats']
             })
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/orgs/tchapgouv/projects/8
+          github-token: ${{ secrets.TRIAGE_TOKEN }}
