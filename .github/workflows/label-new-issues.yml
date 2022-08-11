@@ -2,9 +2,6 @@
 # If the label is already present, this job runs successfully and does nothing.
 name: Label new issues
 
-permissions:
-  repository-projects: read
-
 on:
   issues:
     types:
@@ -33,4 +30,4 @@ jobs:
       - uses: actions/add-to-project@v0.3.0
         with:
           project-url: https://github.com/orgs/tchapgouv/projects/8
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PROJECT_TOKEN }}
