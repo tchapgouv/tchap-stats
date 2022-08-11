@@ -25,11 +25,11 @@ CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON events_aggregate (ho
 /** User Daily Visits **/
 CREATE TABLE IF NOT EXISTS user_daily_visits (
   user_id VARCHAR NOT NULL,
-  user_agent VARCHAR NOT NULL,
   device_id VARCHAR NOT NULL,
-  domain VARCHAR NOT NULL,
+  visit_ts timestamp with time zone NOT NULL,
+  user_agent VARCHAR NOT NULL,
   instance VARCHAR NOT NULL,
-  visit_ts timestamp with time zone NOT NULL
+  domain VARCHAR NOT NULL
 );
 
 -- CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_connections_idx ON user_daily_visits (domain, visit_ts, instance);
