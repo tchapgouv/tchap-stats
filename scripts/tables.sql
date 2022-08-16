@@ -33,4 +33,4 @@ CREATE TABLE IF NOT EXISTS user_daily_visits (
 );
 
 -- CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_idx ON user_daily_visits (domain, visit_ts, instance);
--- CREATE INDEX IF NOT EXISTS unique_user_daily_visit_ts_idx ON user_daily_visits (visit_ts);
+CREATE INDEX IF NOT EXISTS unique_user_daily_visit_ts_idx ON user_daily_visits (visit_ts);
