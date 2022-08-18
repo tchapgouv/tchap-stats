@@ -9,7 +9,7 @@ today=$2
 filename=${filename_without_extension}_${today}.csv
 echo "file to download : $filename"
 
-bucket="tchap-stats-metabase"
+bucket="${S3_BUCKET_NAME}"
 s3path="/${bucket}/${filename}"
 
 # metadata
@@ -20,7 +20,7 @@ signature_string="GET\n\n${contentType}\n${dateValue}\n${s3path}"
 #prepare signature hash to be sent in Authorization header
 signature_hash=`echo -en ${signature_string} | openssl sha1 -hmac ${S3_SECRET_ACCESS_KEY} -binary | base64`
 
-destination="https://tchap-stats-metabase.s3.gra.cloud.ovh.net/${filename}"
+destination="https://${bucket}.s3.gra.cloud.ovh.net/${filename}"
 echo $destination
 
 # actual curl command to do GET operation on s3
