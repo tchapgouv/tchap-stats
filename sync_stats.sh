@@ -12,7 +12,7 @@ echo "Starting job. Should display 'Done' when done, if there were no errors."
 extract_date=$1 # date format ie. 2022-08-10
 if [ -z "$extract_date" ]
 then
-      extract_date=`date +'%Y-%m-%d'`
+      extract_date=$(date -d yesterday +"%Y-%m-%d")
 fi
 
 echo $extract_date
