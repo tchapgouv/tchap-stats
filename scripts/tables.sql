@@ -36,7 +36,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_idx ON user_daily_visits (us
 CREATE INDEX IF NOT EXISTS user_daily_visit_ts_idx ON user_daily_visits (visit_ts);
 
 /** User Monthly Visits **/
-CREATE MATERIALIZED VIEW user_monthly_visits AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS user_monthly_visits AS
 SELECT device_id,
 date_trunc('month', visit_ts) as month,
 user_id,
