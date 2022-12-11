@@ -76,7 +76,7 @@ WHEN user_agent LIKE 'Riot%Android' THEN 'Mobile'
 WHEN user_agent LIKE 'Element%Android' THEN 'Mobile'
 WHEN user_agent LIKE 'Element%iOS' THEN 'Mobile'
 ELSE 'Autre'
-END as plateform
+END as platform
 FROM user_daily_visits
 WHERE user_agent != 'matrix-media-repo' /** We remove matrix-media-repo they are duplicate between Tchap iOS and Android **/
-GROUP BY device_id, month, user_id, instance, domain, device_type, plateform;
+GROUP BY device_id, month, user_id, instance, domain, device_type, platform;
