@@ -80,3 +80,5 @@ END as platform
 FROM user_daily_visits
 WHERE user_agent != 'matrix-media-repo' /** We remove matrix-media-repo they are duplicate between Tchap iOS and Android **/
 GROUP BY device_id, month, user_id, instance, domain, device_type, platform;
+
+CREATE INDEX idx_month ON user_monthly_visits (month);
