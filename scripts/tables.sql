@@ -40,7 +40,6 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS user_monthly_visits AS
 SELECT device_id,
 date_trunc('month', visit_ts) as month,
 user_id,
-user_agent,
 instance,
 domain,
 CASE
@@ -59,4 +58,4 @@ WHEN user_agent LIKE '%Element%' THEN 'Element'
 ELSE 'Autre'
 END as device_type
 FROM user_daily_visits
-GROUP BY device_id, month, user_id, user_agent, instance, domain, device_type;
+GROUP BY device_id, month, user_id, instance, domain, device_type;
