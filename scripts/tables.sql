@@ -66,5 +66,5 @@ WHEN user_agent LIKE 'Element%' THEN 'Element'
 ELSE 'Autre'
 END as device_type
 FROM user_daily_visits
-WHERE user_agent != 'matrix-media-repo'
+WHERE user_agent != 'matrix-media-repo' /** We remove matrix-media-repo they are duplicate between Tchap iOS and Android **/
 GROUP BY device_id, month, user_id, instance, domain, device_type;
