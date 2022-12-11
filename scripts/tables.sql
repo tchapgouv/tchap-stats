@@ -43,18 +43,19 @@ user_id,
 instance,
 domain,
 CASE
-WHEN user_agent LIKE '%Mozilla%Mac OS%Safari%' THEN 'Safari Mac OS'
-WHEN user_agent LIKE '%Mozilla%Windows%Firefox%' THEN 'Firefox Windows'
-WHEN user_agent LIKE '%Mozilla%Windows%Chrome%' THEN 'Chrome Windows'
-WHEN user_agent LIKE '%Mozilla%Mac OS%Firefox%' THEN 'Firefox Mac OS'
-WHEN user_agent LIKE '%Mozilla%Mac OS%Chrome%' THEN 'Chrome Mac OS'
-WHEN user_agent LIKE '%Mozilla%Linux%Firefox%' THEN 'Firefox Linux'
-WHEN user_agent LIKE '%Mozilla%Linux%Chrome%' THEN 'Chrome Linux'
-WHEN user_agent LIKE '%Tchap%NEO%' THEN 'Tchap Android NEO'
-WHEN user_agent LIKE '%Tchap%Android%' THEN 'Tchap Android'
-WHEN user_agent LIKE '%RiotNSE%iOS%' THEN 'Tchap iOS'
-WHEN user_agent LIKE '%Tchap%iOS%' THEN 'Tchap iOS'
-WHEN user_agent LIKE '%Element%' THEN 'Element'
+WHEN user_agent LIKE 'Mozilla%Mac OS%Safari%' THEN 'Safari Mac OS'
+WHEN user_agent LIKE 'Mozilla%Windows%Firefox%' THEN 'Firefox Windows'
+WHEN user_agent LIKE 'Mozilla%Windows%Chrome%' THEN 'Chrome Windows'
+WHEN user_agent LIKE 'Mozilla%Mac OS%Firefox%' THEN 'Firefox Mac OS'
+WHEN user_agent LIKE 'Mozilla%Mac OS%Chrome%' THEN 'Chrome Mac OS'
+WHEN user_agent LIKE 'Mozilla%Linux%Firefox%' THEN 'Firefox Linux'
+WHEN user_agent LIKE 'Mozilla%Linux%Chrome%' THEN 'Chrome Linux'
+WHEN user_agent LIKE 'Tchap%NEO%' THEN 'Tchap Android NEO'
+WHEN user_agent LIKE 'Tchap%Android%' THEN 'Tchap Android'
+WHEN user_agent LIKE 'RiotNSE/2%iOS%' THEN 'Tchap iOS'
+WHEN user_agent LIKE 'Tchap%iOS%' THEN 'Tchap iOS'
+WHEN user_agent LIKE 'Riot%' THEN 'Element'
+WHEN user_agent LIKE 'Element%' THEN 'Element'
 ELSE 'Autre'
 END as device_type
 FROM user_daily_visits
