@@ -10,3 +10,4 @@ FROM user_daily_visits_temp
 ON CONFLICT DO NOTHING
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY user_monthly_visits;
+REFRESH MATERIALIZED VIEW user_first_last_visit;
