@@ -84,3 +84,12 @@ GROUP BY device_id, month, user_id, instance, domain, device_type, platform;
 CREATE INDEX idx_month ON user_monthly_visits (month);
 CREATE UNIQUE INDEX user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
 CREATE INDEX; # Needed for view update
+
+CREATE MATERIALIZED VIEW user_visit_summary AS
+SELECT user_monthly_visits.user_id,
+    date_trunc('month'::text, min(user_monthly_visits.month)) AS first_visit_month,
+    date_trunc('month'::text, max(user_monthly_visits.month)) AS last_visit_month,
+    user_monthly_visits.instance,
+    user_monthly_visits.domain
+   FROM user_monthly_visits
+  GROUP BY user_monthly_visits.user_id, user_monthly_visits.instance, user_monthly_visits.domain;
