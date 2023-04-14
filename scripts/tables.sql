@@ -84,3 +84,29 @@ GROUP BY device_id, month, user_id, instance, domain, device_type, platform;
 CREATE INDEX idx_month ON user_monthly_visits (month);
 CREATE UNIQUE INDEX user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
 CREATE INDEX; # Needed for view update
+
+
+CREATE MATERIALIZED VIEW unique_user_daily_count_30d AS
+WITH date_range AS (
+  SELECT generate_series(
+    CURRENT_DATE - INTERVAL '3 months',
+    CURRENT_DATE,
+    INTERVAL '1 day'
+  )::date AS day
+),
+unique_users_per_day AS (
+  SELECT
+    date_range.day,
+    COUNT(DISTINCT user_daily_visits.user_id) AS unique_user_count
+  FROM
+    date_range
+    LEFT JOIN user_daily_visits ON user_daily_visits.visit_ts >= date_range.day - INTERVAL '30 days'
+    AND user_daily_visits.visit_ts < date_range.day + INTERVAL '1 day'
+  GROUP BY
+    date_range.day
+)
+SELECT
+  day,
+  unique_user_count
+FROM
+  unique_users_per_day;
