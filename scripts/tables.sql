@@ -129,6 +129,8 @@ GROUP BY
   user_id,
   instance,
   domain;
+  
+CREATE INDEX idx_daily_unique_user_count_day ON daily_unique_user_count(day);
 
 CREATE MATERIALIZED VIEW unique_user_daily_count_30d AS
 WITH date_range AS (
