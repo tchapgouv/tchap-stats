@@ -7,5 +7,5 @@ CREATE TEMPORARY TABLE user_daily_visits_temp (user_id VARCHAR, device_id VARCHA
 INSERT INTO user_daily_visits
 SELECT *
 FROM user_daily_visits_temp
-ON CONFLICT DO NOTHING;
+ON CONFLICT DO NOTHING
 
