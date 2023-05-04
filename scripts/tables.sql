@@ -83,12 +83,12 @@ FROM user_daily_visits
 WHERE user_agent != 'matrix-media-repo' /** We remove matrix-media-repo they are duplicate between Tchap iOS and Android **/
 GROUP BY device_id, month, user_id, instance, domain, device_type, platform;
 
-CREATE INDEX idx_month ON user_monthly_visits (month);
-CREATE UNIQUE INDEX user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
-CREATE INDEX; # Needed for view update
+CREATE INDEX IF NOT EXISTS idx_month ON user_monthly_visits (month);
+CREATE UNIQUE INDEX IF NOT EXISTS user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
+CREATE INDEX IF NOT EXISTS; # Needed for view update
 
 
-CREATE MATERIALIZED VIEW daily_unique_user_count AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS daily_unique_user_count AS
 SELECT
   date_trunc('day', visit_ts) AS day,
   user_id,
@@ -132,9 +132,9 @@ GROUP BY
   instance,
   domain;
   
-CREATE INDEX idx_daily_unique_user_count_day ON daily_unique_user_count(day);
+CREATE INDEX IF NOT EXISTS idx_daily_unique_user_count_day ON daily_unique_user_count(day);
 
-CREATE MATERIALIZED VIEW unique_user_daily_count_30d AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS unique_user_daily_count_30d AS
 WITH date_range AS (
   SELECT generate_series(
     CURRENT_DATE - INTERVAL '30 days',
