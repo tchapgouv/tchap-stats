@@ -7,8 +7,9 @@ CREATE TEMPORARY TABLE user_daily_visits_temp (user_id VARCHAR, device_id VARCHA
 INSERT INTO user_daily_visits
 SELECT *
 FROM user_daily_visits_temp
-ON CONFLICT DO NOTHING
+ON CONFLICT DO NOTHING;
 
+/* Refresh View */
 REFRESH MATERIALIZED VIEW CONCURRENTLY user_monthly_visits;
 REFRESH MATERIALIZED VIEW daily_unique_user_count;
 REFRESH MATERIALIZED VIEW unique_user_daily_count_30d;
