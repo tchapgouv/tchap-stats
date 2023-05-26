@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS user_daily_visits (
 
 CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_idx ON user_daily_visits (user_id, device_id, visit_ts);
 CREATE INDEX IF NOT EXISTS user_daily_visit_ts_idx ON user_daily_visits (visit_ts);
+CREATE INDEX IF NOT EXISTS user_visit_user_id_visit_ts_idx ON user_daily_visits (user_id, visit_ts);
+
 
 /** User Monthly Visits **/
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_monthly_visits AS
@@ -81,9 +83,92 @@ FROM user_daily_visits
 WHERE user_agent != 'matrix-media-repo' /** We remove matrix-media-repo they are duplicate between Tchap iOS and Android **/
 GROUP BY device_id, month, user_id, instance, domain, device_type, platform;
 
-CREATE INDEX idx_month ON user_monthly_visits (month);
-CREATE UNIQUE INDEX user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
-CREATE INDEX; # Needed for view update
+CREATE INDEX IF NOT EXISTS idx_month ON user_monthly_visits (month);
+CREATE UNIQUE INDEX IF NOT EXISTS user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
+CREATE INDEX IF NOT EXISTS; # Needed for view update
+
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS daily_unique_user_count AS
+SELECT
+  date_trunc('day', visit_ts) AS day,
+  user_id,
+  instance,
+  domain,
+  COUNT(*) AS visits_count,
+  COUNT(CASE
+    WHEN user_agent LIKE 'Mozilla%' THEN 1
+    ELSE NULL
+  END) AS web_visits_count,
+  COUNT(CASE
+    WHEN user_agent LIKE 'Tchap%Android%' OR
+         user_agent LIKE 'RiotNSE/2%iOS%' OR
+         user_agent LIKE 'RiotSharedExtension/2%iOS%' OR
+         user_agent LIKE 'Tchap%iOS%' OR
+         user_agent LIKE 'Riot%iOS' OR
+         user_agent LIKE 'Riot%Android' OR
+         user_agent LIKE 'Element%Android' OR
+         user_agent LIKE 'Element%iOS'
+    THEN 1
+    ELSE NULL
+  END) AS mobile_visits_count,
+  COUNT(CASE
+    WHEN user_agent NOT LIKE 'Mozilla%' AND
+         user_agent NOT LIKE 'Tchap%Android%' AND
+         user_agent NOT LIKE 'RiotNSE/2%iOS%' AND
+         user_agent NOT LIKE 'RiotSharedExtension/2%iOS%' AND
+         user_agent NOT LIKE 'Tchap%iOS%' AND
+         user_agent NOT LIKE 'Riot%iOS' AND
+         user_agent NOT LIKE 'Riot%Android' AND
+         user_agent NOT LIKE 'Element%Android' AND
+         user_agent NOT LIKE 'Element%iOS'
+    THEN 1
+    ELSE NULL
+  END) AS other_visits_count
+FROM
+  user_daily_visits
+GROUP BY
+  date_trunc('day', visit_ts),
+  user_id,
+  instance,
+  domain;
+  
+CREATE INDEX IF NOT EXISTS idx_daily_unique_user_count_day ON daily_unique_user_count(day);
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS unique_user_daily_count_30d AS
+WITH date_range AS (
+  SELECT generate_series(
+    CURRENT_DATE - INTERVAL '30 days',
+    CURRENT_DATE,
+    INTERVAL '1 day'
+  )::date AS day
+),
+filtered_daily_unique_user_count AS (
+  SELECT
+    day,
+    user_id
+  FROM
+    daily_unique_user_count
+  WHERE
+    day > CURRENT_DATE - INTERVAL '60 days' AND
+    NOT (mobile_visits_count = 0 AND web_visits_count = 0 AND other_visits_count > 0)
+),
+unique_users_per_day AS (
+  SELECT
+    date_range.day,
+    COUNT(DISTINCT filtered_daily_unique_user_count.user_id) AS unique_user_count
+  FROM
+    date_range
+    LEFT JOIN filtered_daily_unique_user_count ON filtered_daily_unique_user_count.day BETWEEN date_range.day - INTERVAL '30 days' AND date_range.day - INTERVAL '1 day'
+  GROUP BY
+    date_range.day
+)
+SELECT
+  day,
+  unique_user_count
+FROM
+  unique_users_per_day;
+
+
 
 CREATE MATERIALIZED VIEW user_visit_summary AS
 SELECT user_monthly_visits.user_id,
