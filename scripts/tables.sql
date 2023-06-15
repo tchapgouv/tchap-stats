@@ -85,7 +85,6 @@ GROUP BY device_id, month, user_id, instance, domain, device_type, platform;
 
 CREATE INDEX IF NOT EXISTS idx_month ON user_monthly_visits (month);
 CREATE UNIQUE INDEX IF NOT EXISTS user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
-CREATE INDEX IF NOT EXISTS;
 
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS daily_unique_user_count AS
