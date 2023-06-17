@@ -45,7 +45,8 @@ CREATE INDEX IF NOT EXISTS user_visit_user_id_visit_ts_idx ON user_daily_visits 
    le refresh dure quelques heures
 */
 /*
-trop lourde ne fonctionne plus
+trop lourde, fonctionne mal
+*/
 CREATE MATERIALIZED VIEW IF NOT EXISTS daily_unique_user_count AS
 SELECT
   date_trunc('day', visit_ts) AS day,
@@ -91,7 +92,7 @@ GROUP BY
   domain;
   
 CREATE INDEX IF NOT EXISTS idx_daily_unique_user_count_day ON daily_unique_user_count(day);
-*/
+
 
 
 /* a quoi sert cette vue? */ 
