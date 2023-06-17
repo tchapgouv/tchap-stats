@@ -25,10 +25,3 @@ scalingo -a tchap-stats-prod db-tunnel --region osc-secnum-fr1 SCALINGO_POSTGRES
 
 ## Connect to the machine
 scalingo --region osc-secnum-fr1 -a tchap-stats-prod run bash 
-
-Running queries
-https://db-osc-secnum-fr1.scalingo.com/dashboard/61f97a20db4d083c9fad26b2/pg-running-queries
-
-
-S3 : 
-https://www.ovh.com/manager/#/public-cloud/pci/projects/ccb5cc4e86ab47df85f500708f4906f8/storages/objects/64474e6f595841746333526864484d746257563059574a686332557552314a42
