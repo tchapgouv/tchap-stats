@@ -46,7 +46,7 @@ echo "Recreate Materialized View : user_daily_visits_agg_1y "
 time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_1y.sql
 
 echo "Recreate Materialized View : user_daily_visits_by_month_1y.sql "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y.sql.sql
+time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y.sql
 
 echo "Refresh Materialized View"
 time psql -d $DATABASE_URL -f scripts/refresh_materialized_view.sql
