@@ -1,7 +1,7 @@
 /*
    vue matérialisée qui agrege les données de user_daily_visits par utilisateur, par jour sur les 30 derniers jours
 */
-DROP IF EXISTS MATERIALIZED VIEW user_daily_visits_agg_30d; 
+DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_agg_30d; 
 
 CREATE MATERIALIZED VIEW user_daily_visits_agg_30d AS
 SELECT
