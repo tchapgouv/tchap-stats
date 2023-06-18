@@ -1,7 +1,7 @@
 /*
    vue matérialisée qui agrege les données de user_daily_visits par device et par  utilisateur et par mois
 */
-DROP IF EXISTS MATERIALIZED VIEW user_daily_visits_by_month_1y; 
+DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_by_month_1y; 
 
 /** User Monthly Visits **/
 CREATE MATERIALIZED VIEW user_daily_visits_by_month_1y AS
