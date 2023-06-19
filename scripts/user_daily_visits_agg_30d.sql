@@ -50,4 +50,7 @@ GROUP BY
   domain;
 
 
+CREATE INDEX idx_user_daily_visits_agg_30d_user_id ON user_daily_visits_agg_30d (user_id);
+CREATE INDEX idx_user_daily_visits_agg_30d_day ON user_daily_visits_agg_30d (day);
+CREATE INDEX idx_user_daily_visits_agg_30d_instance ON user_daily_visits_agg_30d (instance);
 

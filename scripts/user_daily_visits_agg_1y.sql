@@ -48,3 +48,9 @@ GROUP BY
   user_id,
   instance,
   domain;
+
+
+
+CREATE INDEX idx_user_daily_visits_agg_1y_user_id ON user_daily_visits_agg_1y (user_id);
+CREATE INDEX idx_user_daily_visits_agg_1y_day ON user_daily_visits_agg_1y (day);
+CREATE INDEX idx_user_daily_visits_agg_1y_instance ON user_daily_visits_agg_1y (instance);
