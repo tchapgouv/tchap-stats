@@ -57,5 +57,7 @@ GROUP BY
   device_type, 
   platform;
 
-CREATE INDEX IF NOT EXISTS idx_month ON user_monthly_visits (month);
+CREATE INDEX idx_user_daily_visits_by_month_1y_user_id ON user_daily_visits_by_month_1y (user_id);
+CREATE INDEX idx_user_daily_visits_by_month_1y_month ON user_daily_visits_by_month_1y (month);
+CREATE INDEX idx_user_daily_visits_by_month_1y_instance ON user_daily_visits_by_month_1y (instance);
 CREATE UNIQUE INDEX IF NOT EXISTS user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
