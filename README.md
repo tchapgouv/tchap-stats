@@ -5,8 +5,8 @@
 
 ### données brutes
 * user_daily_visits : données globales de toutes les visites des utilisateurs avec leur type d'appareil. 68G lignes
-* subscriptions_aggregate : 
-* events_aggregate : 
+* subscriptions_aggregate : données des nouvelles inscriptions
+* events_aggregate : données des événements matrix
 
 ### vues aggrégées
 * daily_unique_user_count : (deprecated) vue aggrégées par jour des utilisateurs actifs par leur type d'appareil
