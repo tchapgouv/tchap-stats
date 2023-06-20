@@ -1,8 +1,12 @@
 {
   "jobs": [
     {
-      "command": "0 5 * * * ./sync_stats.sh",
-      "comments": "Cron job runs at 5:00AM UTC every day"
+      "command": "0 4 * * * ./sync_data.sh",
+      "comments": "Cron job sync_data runs at 4:00AM UTC every day"
+    },
+    {
+      "command": "0 5 * * * ./sync_views.sh",
+      "comments": "Cron job sync_views at 5:00AM UTC every day"
     }
   ]
 }

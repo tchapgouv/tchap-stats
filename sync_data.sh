@@ -36,20 +36,5 @@ time psql -d $DATABASE_URL -f scripts/insert_events_data.sql
 echo "Insert User Daily Visits"
 time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
 
-echo "Recreate Materialized View : user_daily_visits_agg_30d "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_30d.sql
-
-echo "Recreate Materialized View : user_daily_visits_agg_120d "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_120d.sql
-
-echo "Recreate Materialized View : user_daily_visits_agg_1y "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_1y.sql
-
-echo "Recreate Materialized View : user_daily_visits_by_month_1y.sql "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y.sql
-
-echo "Refresh Materialized View"
-time psql -d $DATABASE_URL -f scripts/refresh_materialized_view.sql
-
 echo "Done !"
 
