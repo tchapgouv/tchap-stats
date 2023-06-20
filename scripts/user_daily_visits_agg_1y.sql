@@ -1,9 +1,9 @@
 /*
    vue matérialisée qui agrege les données de user_daily_visits par utilisateur, par jour sur un an
 */
-DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_agg_1y; 
+/* DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_agg_1y; */
 
-CREATE MATERIALIZED VIEW user_daily_visits_agg_1y AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_agg_1y AS
 SELECT
   date_trunc('day', visit_ts) AS day,
   user_id,
@@ -51,6 +51,8 @@ GROUP BY
 
 
 
-CREATE INDEX idx_user_daily_visits_agg_1y_user_id ON user_daily_visits_agg_1y (user_id);
-CREATE INDEX idx_user_daily_visits_agg_1y_day ON user_daily_visits_agg_1y (day);
-CREATE INDEX idx_user_daily_visits_agg_1y_instance ON user_daily_visits_agg_1y (instance);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_user_id ON user_daily_visits_agg_1y (user_id);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_day ON user_daily_visits_agg_1y (day);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_instance ON user_daily_visits_agg_1y (instance);
+
+REFRESH MATERIALIZED VIEW user_daily_visits_agg_1y;

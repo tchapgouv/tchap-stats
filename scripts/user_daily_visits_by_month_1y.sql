@@ -1,10 +1,10 @@
 /*
    vue matérialisée qui agrege les données de user_daily_visits par device et par  utilisateur et par mois
 */
-DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_by_month_1y; 
+/* DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_by_month_1y; */
 
 /** User Monthly Visits **/
-CREATE MATERIALIZED VIEW user_daily_visits_by_month_1y AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_by_month_1y AS
 SELECT device_id,
 date_trunc('month', visit_ts) as month,
 user_id,
@@ -57,7 +57,9 @@ GROUP BY
   device_type, 
   platform;
 
-CREATE INDEX idx_user_daily_visits_by_month_1y_user_id ON user_daily_visits_by_month_1y (user_id);
-CREATE INDEX idx_user_daily_visits_by_month_1y_month ON user_daily_visits_by_month_1y (month);
-CREATE INDEX idx_user_daily_visits_by_month_1y_instance ON user_daily_visits_by_month_1y (instance);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_by_month_1y_user_id ON user_daily_visits_by_month_1y (user_id);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_by_month_1y_month ON user_daily_visits_by_month_1y (month);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_by_month_1y_instance ON user_daily_visits_by_month_1y (instance);
 CREATE UNIQUE INDEX IF NOT EXISTS user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
+
+REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y; 
