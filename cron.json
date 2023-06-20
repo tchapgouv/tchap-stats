@@ -7,6 +7,10 @@
     {
       "command": "0 5 * * * ./sync_views.sh",
       "comments": "Cron job sync_views at 5:00AM UTC every day"
+    },
+    {
+      "command": "0 5 * * * ./sync_large_views.sh",
+      "comments": "Cron job sync_large_views at 5:00AM UTC every day"
     }
   ]
 }
