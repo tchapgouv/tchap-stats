@@ -1,0 +1,7 @@
+[requires]
+python_version = "3.11.2"
+
+[packages]
+schedule = "*"
+
+[dev-packages]
