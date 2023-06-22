@@ -50,3 +50,11 @@ scalingo -a tchap-stats-prod db-tunnel --region osc-secnum-fr1 SCALINGO_POSTGRES
 
 ## Connect to the machine
 scalingo --region osc-secnum-fr1 -a tchap-stats-prod run bash 
+
+
+## activate cron and deacticate web ps
+do not work with review app
+
+works with prod : 
+calingo --region osc-secnum-fr1 -a tchap-stats-prod scale web:0
+scalingo --region osc-secnum-fr1 -a tchap-stats-prod scale cron:1
