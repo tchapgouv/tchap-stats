@@ -21,12 +21,20 @@
     "DATABASE_URL": {
       "description": "database url",
       "value": "$SCALINGO_POSTGRESQL_URL"
+    },
+    "CRON_SCHEDULE": {
+      "description": "CRON SCHEDULE to run jobs",
+      "value": "01:00"
     }
   },
   "addons": ["postgresql:postgresql-starter"],
   "formation": {
     "web": {
       "amount": 0,
+      "size": "S"
+    }, 
+    "cron": {
+      "amount": 1,
       "size": "S"
     }
   }
