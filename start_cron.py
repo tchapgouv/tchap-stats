@@ -15,6 +15,7 @@ def start_cron():
         print("checking pending jobs...")
         schedule.run_pending()
         time.sleep(60)# the cron will check every second (to test) 
+        print("checking pending jobs...")
 
 
 if __name__ == "__main__":
