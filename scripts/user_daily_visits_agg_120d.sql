@@ -53,5 +53,11 @@ GROUP BY
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_120d_user_id ON user_daily_visits_agg_120d (user_id);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_120d_day ON user_daily_visits_agg_120d (day);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_120d_instance ON user_daily_visits_agg_120d (instance);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_120d_domain ON user_daily_visits_agg_120d (domain);
+/* index on counts */
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_120d_visits_count ON user_daily_visits_agg_120d (visits_count);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_120d_web_visits_count ON user_daily_visits_agg_120d (web_visits_count);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_120d_mobile_visits_count ON user_daily_visits_agg_120d (mobile_visits_count);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_120d_other_visits_count ON user_daily_visits_agg_120d (other_visits_count);
 
 REFRESH MATERIALIZED VIEW user_daily_visits_agg_120d; 
