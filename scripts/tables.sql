@@ -129,3 +129,14 @@ SELECT
   unique_user_count
 FROM
   unique_users_per_day;
+
+
+
+CREATE MATERIALIZED VIEW user_visit_summary AS
+SELECT user_monthly_visits.user_id,
+    date_trunc('month'::text, min(user_monthly_visits.month)) AS first_visit_month,
+    date_trunc('month'::text, max(user_monthly_visits.month)) AS last_visit_month,
+    user_monthly_visits.instance,
+    user_monthly_visits.domain
+   FROM user_monthly_visits
+  GROUP BY user_monthly_visits.user_id, user_monthly_visits.instance, user_monthly_visits.domain;
