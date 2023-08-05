@@ -37,16 +37,12 @@ You may need to first create a dummy app to get the scalingo machine up (see [th
 
 Access the database
 
-add your public ssh key to your scalingo profile
-with a tunnel 
-
-scalingo -a tchap-stats-prod db-tunnel SCALINGO_POSTGRESQL_URL
-You can access your database on:
-127.0.0.1:10000
-
-
+Add your public ssh key to your scalingo profile
 ## Create a local tunnel 
 scalingo -a tchap-stats-prod db-tunnel --region osc-secnum-fr1 SCALINGO_POSTGRESQL_URL
+
+You can access your database on:
+127.0.0.1:10000
 
 ## Connect to the machine
 scalingo --region osc-secnum-fr1 -a tchap-stats-prod run bash 
