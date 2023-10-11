@@ -135,7 +135,7 @@ FROM
 user_name, device_id, app_id, kind, enabled, instance, domain
 **/
 CREATE TABLE IF NOT EXISTS pushers_aggregate (
-  user_name VARCHAR NOT NULL,
+  user_id VARCHAR NOT NULL,
   device_id VARCHAR NOT NULL,
   app_id VARCHAR NOT NULL,
   kind VARCHAR NOT NULL,
