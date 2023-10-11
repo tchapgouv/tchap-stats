@@ -129,3 +129,21 @@ SELECT
   unique_user_count
 FROM
   unique_users_per_day;
+
+
+/** Pushers aggregate data 
+user_name, device_id, app_id, kind, enabled, instance, domain
+**/
+CREATE TABLE IF NOT EXISTS pushers_aggregate (
+  user_name VARCHAR NOT NULL,
+  device_id VARCHAR NOT NULL,
+  app_id VARCHAR NOT NULL,
+  kind VARCHAR NOT NULL,
+  is_enabled BOOLEAN NOT NULL,
+  instance VARCHAR NOT NULL,
+  domain VARCHAR NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS pushers_aggregate_domain_idx ON pushers_aggregate (domain);
+CREATE INDEX IF NOT EXISTS pushers_aggregate_kind_idx ON pushers_aggregate (kind);
+CREATE INDEX IF NOT EXISTS pushers_aggregate_instance_idx ON pushers_aggregate (instance);
