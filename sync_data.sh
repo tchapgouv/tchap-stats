@@ -21,9 +21,10 @@ echo "Fetch S3 subscriptions_aggregate"
 time ./fetch_from_s3.sh subscriptions_aggregate $extract_date
 echo "Fetch S3 events_aggregate"
 time ./fetch_from_s3.sh events_aggregate $extract_date
-echo "Fetch S3 time ./fetch_from_s3.sh user_daily_visits $extract_date
-"
+echo "Fetch S3 user_daily_visits $extract_date"
 time ./fetch_from_s3.sh user_daily_visits $extract_date
+echo "Fetch S3 pushers $extract_date"
+time ./fetch_from_s3.sh pushers $extract_date
 
 ## Set up DB
 psql -d $DATABASE_URL -f scripts/tables.sql
