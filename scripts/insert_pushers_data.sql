@@ -5,7 +5,7 @@ CREATE TEMPORARY TABLE pushers_aggregate_temp (user_name VARCHAR, device_id VARC
 
 -- CSV file has fields in this order : user_name, device_id, app_id, kind, enabled, instance, domain
 -- If it changes, change this line or it will break.
-\copy pushers_aggregate_temp(user_name, device_id, app_id, kind, is_enabled, instance, domain) FROM '/app/pushers_aggregate.csv' DELIMITER ',' CSV HEADER;
+\copy pushers_aggregate_temp(user_name, device_id, app_id, kind, is_enabled, instance, domain) FROM '/app/pushers.csv' DELIMITER ',' CSV HEADER;
 
 INSERT INTO pushers_aggregate
 SELECT *
