@@ -25,6 +25,8 @@ echo "Fetch S3 user_daily_visits $extract_date"
 time ./fetch_from_s3.sh user_daily_visits $extract_date
 echo "Fetch S3 pushers $extract_date"
 time ./fetch_from_s3.sh pushers $extract_date
+echo "Fetch S3 account_data $extract_date"
+time ./fetch_from_s3.sh account_data $extract_date
 
 ## Set up DB
 psql -d $DATABASE_URL -f scripts/tables.sql
@@ -38,6 +40,8 @@ echo "Insert User Daily Visits"
 time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
 echo "Insert Pushers"
 time psql -d $DATABASE_URL -f scripts/insert_pushers_data.sql
+echo "Insert Account Data"
+time psql -d $DATABASE_URL -f scripts/insert_account_data_data.sql
 
 echo "Done !"
 
