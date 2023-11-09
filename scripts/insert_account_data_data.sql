@@ -8,7 +8,8 @@ CREATE TEMPORARY TABLE account_data_aggregate_temp (user_id VARCHAR, account_dat
 -- If it changes, change this line or it will break.
 \copy account_data_aggregate_temp(user_id, account_data_type, content, instance, domain) FROM '/app/account_data.csv' DELIMITER ',' CSV HEADER;
 
-INSERT INTO account_data_aggregate
-SELECT *
+
+INSERT INTO account_data_aggregate(user_id, account_data_type, content, instance, domain)
+SELECT user_id, account_data_type, content c, instance, domain
 FROM account_data_aggregate_temp
-ON CONFLICT DO UPDATE SET account_data_aggregate.content = account_data_aggregate_temp.content
+ON CONFLICT (user_id, account_data_type) DO update set content=EXCLUDED.content;
