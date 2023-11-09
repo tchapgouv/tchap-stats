@@ -162,6 +162,8 @@ CREATE TABLE IF NOT EXISTS account_data_aggregate (
   domain VARCHAR NOT NULL
 );
 
+/* create a unique index to avoid duplicates when importing data */
+CREATE INDEX IF NOT EXISTS unique_account_data_aggregate_idx ON account_data_aggregate (user_id, account_data_type);
 CREATE INDEX IF NOT EXISTS account_data_aggregate_domain_idx ON account_data_aggregate (domain);
 CREATE INDEX IF NOT EXISTS account_data_aggregate_type_idx ON account_data_aggregate (account_data_type);
 CREATE INDEX IF NOT EXISTS account_data_aggregate_instance_idx ON account_data_aggregate (instance);

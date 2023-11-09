@@ -1,4 +1,5 @@
-/* Insert data from the csv file into the DB. Some of the data will be already present in the DB, they will be ignored. */
+/* Insert data from the csv file into the DB. */
+/* If data is already present, update the content field */
 /* user_id	account_data_type	content	instance domain*/
 
 CREATE TEMPORARY TABLE account_data_aggregate_temp (user_id VARCHAR, account_data_type VARCHAR, content VARCHAR, instance VARCHAR, domain VARCHAR);
@@ -10,4 +11,4 @@ CREATE TEMPORARY TABLE account_data_aggregate_temp (user_id VARCHAR, account_dat
 INSERT INTO account_data_aggregate
 SELECT *
 FROM account_data_aggregate_temp
-ON CONFLICT DO NOTHING
+ON CONFLICT DO UPDATE SET account_data_aggregate.content = account_data_aggregate_temp.content
