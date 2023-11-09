@@ -11,4 +11,4 @@ CREATE TEMPORARY TABLE account_data_aggregate_temp (user_id VARCHAR, account_dat
 INSERT INTO account_data_aggregate
 SELECT *
 FROM account_data_aggregate_temp
-ON CONFLICT DO UPDATE SET account_data_aggregate.content = account_data_aggregate_temp.content
+ON CONFLICT (unique_account_data_aggregate_idx) DO UPDATE SET account_data_aggregate.content = account_data_aggregate_temp.content
