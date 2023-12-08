@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS crisp_conversation_segments (
   updated_at timestamp NOT NULL
 );
 
+CREATE UNIQUE INDEX IF NOT EXISTS unique_crisp_conversation_segments_idx ON crisp_conversation_segments (session_id, segment);
 CREATE INDEX IF NOT EXISTS crisp_conversation_segments_idx ON crisp_conversation_segments (session_id);
 CREATE INDEX IF NOT EXISTS crisp_conversation_segment_idx ON crisp_conversation_segments (segment);
 CREATE INDEX IF NOT EXISTS crisp_conversation_state_idx ON crisp_conversation_segments (state);
