@@ -22,7 +22,7 @@ CREATE TEMPORARY TABLE crisp_conversation_segments_temp (session_id VARCHAR, sta
 
 -- CSV file has fields in this order : user_id	account_data_type	content	instance domain
 -- If it changes, change this line or it will break.
-\copy account_data_aggregate_temp(session_id, state, segment, created_at, updated_at) FROM '/app/crisp_conversation_segments.csv' DELIMITER ',' CSV HEADER;
+\copy crisp_conversation_segments_temp(session_id, state, segment, created_at, updated_at) FROM '/app/crisp_conversation_segments.csv' DELIMITER ',' CSV HEADER;
 
 
 INSERT INTO crisp_conversation_segments (session_id, state, segment, created_at, updated_at)
