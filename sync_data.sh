@@ -27,6 +27,9 @@ echo "Fetch S3 pushers $extract_date"
 time ./fetch_from_s3.sh pushers $extract_date
 echo "Fetch S3 account_data $extract_date"
 time ./fetch_from_s3.sh account_data $extract_date
+echo "Fetch S3 crisp_conversation_segments $extract_date"
+time ./fetch_from_s3.sh crisp_conversation_segments $extract_date
+
 
 ## Set up DB
 psql -d $DATABASE_URL -f scripts/tables.sql
@@ -42,6 +45,8 @@ echo "Insert Pushers"
 time psql -d $DATABASE_URL -f scripts/insert_pushers_data.sql
 echo "Insert Account Data"
 time psql -d $DATABASE_URL -f scripts/insert_account_data_data.sql
+echo "Insert crisp conversation segments"
+time psql -d $DATABASE_URL -f scripts/insert_crisp_conversation_segments.sql
 
 echo "Done !"
 
