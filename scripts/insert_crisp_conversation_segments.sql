@@ -29,4 +29,4 @@ CREATE TEMPORARY TABLE crisp_conversation_segments_temp (session_id VARCHAR, sta
 INSERT INTO crisp_conversation_segments (session_id, state, segment, created_at, updated_at)
 SELECT *
 FROM crisp_conversation_segments_temp
-ON CONFLICT DO NOTHING
+ON CONFLICT (session_id, segment) DO update set state=EXCLUDED.state;
