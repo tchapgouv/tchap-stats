@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW IF NOT EXISTS draft_retention_12_months AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS retention_user_activity_12_months AS
 SELECT
 user_id,
 SUM(CASE WHEN month >= date_trunc('month', now() - interval '12 month') AND month < date_trunc('month', now() - interval '11 month') THEN 1 ELSE 0 END) AS mois_minus_12,
@@ -12,16 +12,18 @@ SUM(CASE WHEN month >= date_trunc('month', now() - interval '5 month') AND month
 SUM(CASE WHEN month >= date_trunc('month', now() - interval '4 month') AND month < date_trunc('month', now() - interval '3 month') THEN 1 ELSE 0 END) AS mois_minus_4,
 SUM(CASE WHEN month >= date_trunc('month', now() - interval '3 month') AND month < date_trunc('month', now() - interval '2 month') THEN 1 ELSE 0 END) AS mois_minus_3,
 SUM(CASE WHEN month >= date_trunc('month', now() - interval '2 month') AND month < date_trunc('month', now() - interval '1 month') THEN 1 ELSE 0 END) AS mois_minus_2,
-SUM(CASE WHEN month >= date_trunc('month', now() - interval '1 month') AND month < date_trunc('month', now()) THEN 1 ELSE 0 END) AS mois_minus_1,
-SUM(CASE WHEN month > date_trunc('month', now()) THEN 1 ELSE 0 END) AS mois_en_cours
+SUM(CASE WHEN month >= date_trunc('month', now() - interval '1 month') AND month < date_trunc('month', now()) THEN 1 ELSE 0 END) AS mois_minus_1
 FROM user_daily_visits_by_month_1y where "device_type" != 'Autre'
 GROUP BY user_id
+
+
 
 
 /* create a cohort view for the last 12 months */ 
 CREATE MATERIALIZED VIEW IF NOT EXISTS draft_retention_12_months_binary AS
 SELECT
 user_id,
+CAST(
 MAX(CASE WHEN month >= date_trunc('month', now() - interval '12 month') AND month < date_trunc('month', now() - interval '11 month') THEN 1 ELSE 0 END) *1000000000000+
 MAX(CASE WHEN month >= date_trunc('month', now() - interval '11 month') AND month < date_trunc('month', now() - interval '10 month') THEN 1 ELSE 0 END) *100000000000+
 MAX(CASE WHEN month >= date_trunc('month', now() - interval '10 month') AND month < date_trunc('month', now() - interval '9 month') THEN 1 ELSE 0 END) *10000000000+
@@ -34,9 +36,12 @@ MAX(CASE WHEN month >= date_trunc('month', now() - interval '4 month') AND month
 MAX(CASE WHEN month >= date_trunc('month', now() - interval '3 month') AND month < date_trunc('month', now() - interval '2 month') THEN 1 ELSE 0 END) *1000+
 MAX(CASE WHEN month >= date_trunc('month', now() - interval '2 month') AND month < date_trunc('month', now() - interval '1 month') THEN 1 ELSE 0 END) *100+
 MAX(CASE WHEN month >= date_trunc('month', now() - interval '1 month') AND month < date_trunc('month', now()) THEN 1 ELSE 0 END)*10+
-MAX(CASE WHEN month > date_trunc('month', now()) THEN 1 ELSE 0 END)*1 AS cohort_binary
+MAX(CASE WHEN month > date_trunc('month', now()) THEN 1 ELSE 0 END)*1 AS varchar)  AS cohort_binary
 FROM user_daily_visits_by_month_1y where "device_type" != 'Autre'
 GROUP BY user_id
+
+
+
 
 
 /* exemple of results */ 
@@ -53,30 +58,60 @@ GROUP BY user_id
 \x0002430b02502a4d0f72370892507cebcb5eda2d1ec0336e68d2b9701a8461ea	0	1	0	0	0	1	0	0	1	0	0	0	0
 \x00024b85baa0809093fcab22437d78f20164357816c5ca2ca6d6a01d72732a2e	2	2	1	1	1	2	2	3	3	2	2	2	0
 
+
 /* create a cohort view for the last 12 months */ 
-CREATE MATERIALIZED VIEW IF NOT EXISTS draft_retention_12_months_binary AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS retention_12_months_binary_varchar AS
 SELECT
 user_id,
-(CASE WHEN month >= date_trunc('month', now() - interval '12 month') AND month < date_trunc('month', now() - interval '11 month') THEN 1 ELSE 0 END) *1000000000000+
-(CASE WHEN month >= date_trunc('month', now() - interval '11 month') AND month < date_trunc('month', now() - interval '10 month') THEN 1 ELSE 0 END) *100000000000+
-(CASE WHEN month >= date_trunc('month', now() - interval '10 month') AND month < date_trunc('month', now() - interval '9 month') THEN 1 ELSE 0 END) *10000000000+
-(CASE WHEN month >= date_trunc('month', now() - interval '9 month') AND month < date_trunc('month', now() - interval '8 month') THEN 1 ELSE 0 END) *1000000000+
-(CASE WHEN month >= date_trunc('month', now() - interval '8 month') AND month < date_trunc('month', now() - interval '7 month') THEN 1 ELSE 0 END) *100000000+
-(CASE WHEN month >= date_trunc('month', now() - interval '7 month') AND month < date_trunc('month', now() - interval '6 month') THEN 1 ELSE 0 END) *10000000+
-(CASE WHEN month >= date_trunc('month', now() - interval '6 month') AND month < date_trunc('month', now() - interval '5 month') THEN 1 ELSE 0 END) *1000000+
-(CASE WHEN month >= date_trunc('month', now() - interval '5 month') AND month < date_trunc('month', now() - interval '4 month') THEN 1 ELSE 0 END) *100000+
-(CASE WHEN month >= date_trunc('month', now() - interval '4 month') AND month < date_trunc('month', now() - interval '3 month') THEN 1 ELSE 0 END) *10000+
-(CASE WHEN month >= date_trunc('month', now() - interval '3 month') AND month < date_trunc('month', now() - interval '2 month') THEN 1 ELSE 0 END) *1000+
-(CASE WHEN month >= date_trunc('month', now() - interval '2 month') AND month < date_trunc('month', now() - interval '1 month') THEN 1 ELSE 0 END) *100+
-(CASE WHEN month >= date_trunc('month', now() - interval '1 month') AND month < date_trunc('month', now()) THEN 1 ELSE 0 END)*10+
-(CASE WHEN month > date_trunc('month', now()) THEN 1 ELSE 0 END)*1 AS cohort_binary
+CAST(
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '12 month') AND month < date_trunc('month', now() - interval '11 month') THEN 1 ELSE 0 END) *100000000000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '11 month') AND month < date_trunc('month', now() - interval '10 month') THEN 1 ELSE 0 END) *10000000000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '10 month') AND month < date_trunc('month', now() - interval '9 month') THEN 1 ELSE 0 END) *1000000000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '9 month') AND month < date_trunc('month', now() - interval '8 month') THEN 1 ELSE 0 END) *100000000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '8 month') AND month < date_trunc('month', now() - interval '7 month') THEN 1 ELSE 0 END) *10000000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '7 month') AND month < date_trunc('month', now() - interval '6 month') THEN 1 ELSE 0 END) *1000000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '6 month') AND month < date_trunc('month', now() - interval '5 month') THEN 1 ELSE 0 END) *100000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '5 month') AND month < date_trunc('month', now() - interval '4 month') THEN 1 ELSE 0 END) *10000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '4 month') AND month < date_trunc('month', now() - interval '3 month') THEN 1 ELSE 0 END) *1000+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '3 month') AND month < date_trunc('month', now() - interval '2 month') THEN 1 ELSE 0 END) *100+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '2 month') AND month < date_trunc('month', now() - interval '1 month') THEN 1 ELSE 0 END) *10+
+MAX(CASE WHEN month >= date_trunc('month', now() - interval '1 month') AND month < date_trunc('month', now()) THEN 1 ELSE 0 END)*1
+AS varchar)  AS cohort_binary
 FROM user_daily_visits_by_month_1y where "device_type" != 'Autre'
 GROUP BY user_id
 
+CREATE UNIQUE INDEX IF NOT EXISTS unique_idx_retention_12_months_binary_user_id ON retention_12_months_binary_varchar (user_id);
+
+SELECT COUNT(*)
+FROM retention_12_months_binary_varchar
+WHERE cohort_binary LIKE '%1000';
+
 /* exemple of results */ 
-userId, retention(monthly_activity)
 \x00007a01d6c74adbf2e5ca29843989ff9db2e0a73e63fcbf7b1057c19a714336,100000000000
 \x000082d929c3757acb5142326a3558c40689d93cb7a6bbbf161635a7090a4645,1111111111110
 \x000084413b7a923f9606ece64a0e07aaa7c1aaff282ec13fc065d7a38df81bc2,1111111111110
 \x00009f48ad9c7a906134650a617638629a526263327ed4a735fb1821fbdec872,1000000000110
 \x0000f4b623e5f3c2aafc31af42ae164ad001a1726a40c6cef11e8216b1b4a1f6,1101110000000
+
+
+
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS retention_last_activity_per_month AS
+SELECT
+  user_id,
+  CASE 
+  WHEN cohort_binary LIKE '%1'  THEN date_trunc('month', now() - interval '1 month')
+   WHEN cohort_binary LIKE '%100'  THEN date_trunc('month', now() - interval '2 month')
+   WHEN cohort_binary LIKE '%1000'  THEN date_trunc('month', now() - interval '3 month') 
+   WHEN cohort_binary LIKE '%10000'  THEN date_trunc('month', now() - interval '4 month') 
+   WHEN cohort_binary LIKE '%100000'  THEN date_trunc('month', now() - interval '5 month') 
+   WHEN cohort_binary LIKE '%1000000'  THEN date_trunc('month', now() - interval '6 month') 
+   WHEN cohort_binary LIKE '%10000000'  THEN date_trunc('month', now() - interval '7 month')
+   WHEN cohort_binary LIKE '%100000000'  THEN date_trunc('month', now() - interval '8 month') 
+   WHEN cohort_binary LIKE '%1000000000'  THEN date_trunc('month', now() - interval '9 month') 
+   WHEN cohort_binary LIKE '%10000000000'  THEN date_trunc('month', now() - interval '10 month')
+   WHEN cohort_binary LIKE '%100000000000'  THEN date_trunc('month', now() - interval '11 month')
+   WHEN cohort_binary LIKE '%1000000000000'  THEN date_trunc('month', now() - interval '12 month') 
+   END as last_activity_month
+FROM
+  retention_12_months_binary_varchar;
