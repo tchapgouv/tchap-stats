@@ -8,7 +8,7 @@
 * subscriptions_aggregate : données des nouvelles inscriptions
 * events_aggregate : données des événements matrix
 
-### vues aggrégées
+### vues matérialisées
 * daily_unique_user_count : (deprecated, too long to update) vue aggrégées par jour des utilisateurs actifs par leur type d'appareil
 * monthly_unique_user_count : (deprecated, too long to update) vue aggrégées par mois des utilisateurs actifs par leur type d'appareil
 * unique_user_daily_count_30d : //TODO
