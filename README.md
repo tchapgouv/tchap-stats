@@ -9,15 +9,13 @@ Viennent des exports des base de données de Tchap
 * user_daily_visits : données globales de toutes les visites des utilisateurs avec leur type d'appareil. aggrégé par jour. 68 milliard de lignes
 * subscriptions_aggregate : données des nouvelles inscriptions
 * events_aggregate : données des événements matrix
+* crisp_conversation_segments : TODO
+* account_data_aggregate : TODO
 
 ## vues matérialisées (materialized view)
 Construites à partir des vues de données brutes. 
 Elles permettent d'aggréger les données selon une ou deux dimensions ce qui accèlere le temps de traitement lors de la création des dashboard. 
-* daily_unique_user_count : (deprecated, too long to update) vue aggrégées par jour des utilisateurs actifs par leur type d'appareil
-* monthly_unique_user_count : (deprecated, too long to update) vue aggrégées par mois des utilisateurs actifs par leur type d'appareil
-* unique_user_daily_count_30d : //TODO
-* user_monthly_visits : (deprecated, too long to update) use instead user_daily_visits_by_month_1y
-* user_visit_summary : //TODO
+
 
 ### vue aggrégés de user_daily_visits
 
@@ -28,6 +26,12 @@ Elles permettent d'aggréger les données selon une ou deux dimensions ce qui ac
 * user_daily_visits_by_month_YY : vue aggrégée par mois des utilisateurs actifs par leur type d'appareil sur une période de temps. 1y
   * user_daily_visits_by_month_1y : la derniere année
 
+#### Deprecated
+* daily_unique_user_count : (deprecated, too long to update) vue aggrégées par jour des utilisateurs actifs par leur type d'appareil
+* monthly_unique_user_count : (deprecated, too long to update) vue aggrégées par mois des utilisateurs actifs par leur type d'appareil
+* unique_user_daily_count_30d : //TODO
+* user_monthly_visits : (deprecated, too long to update) use instead user_daily_visits_by_month_1y
+* user_visit_summary : //TODO
 
 
 ## fonctionnement
