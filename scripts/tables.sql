@@ -146,6 +146,8 @@ CREATE TABLE IF NOT EXISTS pushers_aggregate (
 
 CREATE INDEX IF NOT EXISTS pushers_aggregate_domain_idx ON pushers_aggregate (domain);
 CREATE INDEX IF NOT EXISTS pushers_aggregate_kind_idx ON pushers_aggregate (kind);
+CREATE INDEX IF NOT EXISTS pushers_aggregate_is_enabled_idx ON pushers_aggregate (is_enabled);
+CREATE INDEX IF NOT EXISTS pushers_aggregate_app_id_idx ON pushers_aggregate (app_id);
 CREATE INDEX IF NOT EXISTS pushers_aggregate_instance_idx ON pushers_aggregate (instance);
 
 
