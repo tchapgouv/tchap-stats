@@ -39,8 +39,10 @@ psql -d $DATABASE_URL -f scripts/tables.sql
 #### Now insert into DB
 echo "Insert Subscriptions"
 time psql -d $DATABASE_URL -f scripts/insert_subscriptions_data.sql
-echo "Insert Events"
-time psql -d $DATABASE_URL -f scripts/insert_events_data.sql
+# echo "Insert Events"
+# time psql -d $DATABASE_URL -f scripts/insert_events_data.sql
+echo "Insert Events roomv9"
+time psql -d $DATABASE_URL -f scripts/insert_events_roomv9_data.sql
 echo "Insert User Daily Visits"
 time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
 echo "Insert Pushers"
