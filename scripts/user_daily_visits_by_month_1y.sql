@@ -65,6 +65,4 @@ CREATE INDEX IF NOT EXISTS idx_user_daily_visits_by_month_1y_domain ON user_dail
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_by_month_1y_device_type ON user_daily_visits_by_month_1y (device_type);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_by_month_1y_platform ON user_daily_visits_by_month_1y (platform);
 
-CREATE UNIQUE INDEX IF NOT EXISTS user_monthly_visits_index ON user_monthly_visits (month,device_id,user_id,device_type);
-
 REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y; 
