@@ -1,3 +1,4 @@
+/*
 CREATE MATERIALIZED VIEW IF NOT EXISTS retention_user_activity_12_months AS
 SELECT
 user_id,
@@ -15,11 +16,11 @@ SUM(CASE WHEN month >= date_trunc('month', now() - interval '2 month') AND month
 SUM(CASE WHEN month >= date_trunc('month', now() - interval '1 month') AND month < date_trunc('month', now()) THEN 1 ELSE 0 END) AS mois_minus_1
 FROM user_daily_visits_by_month_1y where "device_type" != 'Autre'
 GROUP BY user_id
+*/
 
 
 
-
-/* create a cohort view for the last 12 months */ 
+/* create a cohort view for the last 12 months
 CREATE MATERIALIZED VIEW IF NOT EXISTS draft_retention_12_months_binary AS
 SELECT
 user_id,
@@ -41,7 +42,7 @@ FROM user_daily_visits_by_month_1y where "device_type" != 'Autre'
 GROUP BY user_id
 
 
-
+ */ 
 
 
 /* exemple of results */ 
@@ -94,7 +95,7 @@ WHERE cohort_binary LIKE '%1000';
 \x0000f4b623e5f3c2aafc31af42ae164ad001a1726a40c6cef11e8216b1b4a1f6,1101110000000
 
 
-
+/*
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS retention_last_activity_per_month AS
 SELECT
@@ -115,3 +116,5 @@ SELECT
    END as last_activity_month
 FROM
   retention_12_months_binary_varchar;
+
+*/
