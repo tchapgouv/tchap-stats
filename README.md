@@ -59,10 +59,19 @@ You can access your database on:
 ## Connect to the machine
 scalingo --region osc-secnum-fr1 -a tchap-stats-prod run bash 
 
+### run an import manually 
+
+
+```
+# To import the file of the 2024-10-15 of user daily visits
+extract_date=2024-10-15
+time ./fetch_from_s3.sh user_daily_visits $extract_date
+time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
+```
 
 ## activate cron and deacticate web ps
 do not work with review app
 
 works with prod : 
-calingo --region osc-secnum-fr1 -a tchap-stats-prod scale web:0
+scalingo --region osc-secnum-fr1 -a tchap-stats-prod scale web:0
 scalingo --region osc-secnum-fr1 -a tchap-stats-prod scale cron:1
