@@ -16,5 +16,8 @@ time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_30d.sql
 echo "Recreate Materialized View : user_daily_visits_agg_120d "
 time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_120d.sql
 
+echo "Filling table  : user_monthly_visits_lite"
+time psql -d $DATABASE_URL -f scripts/user_monthly_visits_lite.sql
+
 echo "Done !"
 
