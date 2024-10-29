@@ -1,16 +1,18 @@
-/* Insert data from the csv file into the DB. Some of the data will be already present in the DB, they will be ignored. */
-
-CREATE TEMPORARY TABLE user_daily_visits_temp (user_id VARCHAR, device_id VARCHAR, visit_ts timestamp with time zone, user_agent VARCHAR, instance VARCHAR, domain VARCHAR);
-
-\COPY user_daily_visits_temp(user_id, device_id, visit_ts, user_agent, instance, domain) FROM '/app/user_daily_visits.csv' DELIMITER ',' CSV HEADER;
-
-INSERT INTO user_daily_visits
-SELECT user_id,
-device_id,
-visit_ts,
-user_agent,
-instance,
-domain,
+UPDATE user_daily_visits
+SET platform =
+CASE
+    WHEN user_agent LIKE 'Mozilla%' THEN 'Web'
+    WHEN user_agent LIKE 'Tchap%Android%' THEN 'Mobile'
+    WHEN user_agent LIKE 'RiotNSE/2%iOS%' THEN 'Mobile'
+    WHEN user_agent LIKE 'RiotSharedExtension/2%iOS%' THEN 'Mobile'
+    WHEN user_agent LIKE 'Tchap%iOS%' THEN 'Mobile'
+    WHEN user_agent LIKE 'Riot%iOS' THEN 'Mobile'
+    WHEN user_agent LIKE 'Riot%Android' THEN 'Mobile'
+    WHEN user_agent LIKE 'Element%Android' THEN 'Mobile'
+    WHEN user_agent LIKE 'Element%iOS' THEN 'Mobile'
+    ELSE 'Autre'
+END,
+device_type =
 CASE
     WHEN user_agent LIKE 'Mozilla%Windows%Firefox%' THEN 'Firefox Windows'
     WHEN user_agent LIKE 'Mozilla%Windows%Chrome%' THEN 'Chrome Windows'
@@ -33,19 +35,5 @@ CASE
     WHEN user_agent LIKE 'Riot%' THEN 'Element'
     WHEN user_agent LIKE 'Element%' THEN 'Element'
     ELSE 'Autre'
-END as device_type,
-CASE
-    WHEN user_agent LIKE 'Mozilla%' THEN 'Web'
-    WHEN user_agent LIKE 'Tchap%Android%' THEN 'Mobile'
-    WHEN user_agent LIKE 'RiotNSE/2%iOS%' THEN 'Mobile'
-    WHEN user_agent LIKE 'RiotSharedExtension/2%iOS%' THEN 'Mobile'
-    WHEN user_agent LIKE 'Tchap%iOS%' THEN 'Mobile'
-    WHEN user_agent LIKE 'Riot%iOS' THEN 'Mobile'
-    WHEN user_agent LIKE 'Riot%Android' THEN 'Mobile'
-    WHEN user_agent LIKE 'Element%Android' THEN 'Mobile'
-    WHEN user_agent LIKE 'Element%iOS' THEN 'Mobile'
-    ELSE 'Autre'
-END as platform
-FROM user_daily_visits_temp
-ON CONFLICT DO NOTHING
-
+END
+WHERE platform IS NULL OR device_type IS NULL;
