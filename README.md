@@ -64,7 +64,9 @@ You can access your database on:
 127.0.0.1:10000
 
 ## Connect to the machine
+```
 scalingo --region osc-secnum-fr1 -a tchap-stats-prod run bash 
+```
 
 ### run an import manually 
 
