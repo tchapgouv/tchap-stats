@@ -10,6 +10,9 @@ def start_cron():
     cron_schedule:str = os.getenv('CRON_SCHEDULE', '01:00')
     force_sync_at_start:bool = os.getenv('FORCE_SYNC_AT_START', False)
 
+    print(f"FORCE_SYNC_AT_START : {force_sync_at_start}")
+
+
     #if wanted, launch the sync stats process when container is restarted
     if force_sync_at_start:
         try: 
@@ -18,7 +21,7 @@ def start_cron():
             print(f"job_sync_stats job has failed")
 
 
-    print(f"CRON SCHEDULE {cron_schedule}")
+    print(f"CRON SCHEDULE: {cron_schedule}")
     schedule.every().day.at(cron_schedule).do(job_sync_stats)    
 
     while True:
