@@ -25,6 +25,10 @@
     "CRON_SCHEDULE": {
       "description": "CRON SCHEDULE to run jobs",
       "value": "01:00"
+    },
+  "FORCE_SYNC_AT_START": {
+      "description": "if true, run the sync stats job at container start",
+      "value": "False"
     }
   },
   "addons": ["postgresql:postgresql-starter"],
