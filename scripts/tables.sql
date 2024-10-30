@@ -149,16 +149,6 @@ CREATE TABLE IF NOT EXISTS pushers_aggregate (
 CREATE UNIQUE INDEX IF NOT EXISTS pushers_aggregate_unique ON pushers_aggregate (added_date, kind, app_id,device_id);
 CREATE INDEX IF NOT EXISTS pushers_aggregate_kind_idx ON pushers_aggregate (kind);
 
-/*
-/* unused so far
-CREATE INDEX IF NOT EXISTS pushers_aggregate_domain_idx ON pushers_aggregate (domain);
-CREATE INDEX IF NOT EXISTS pushers_aggregate_is_enabled_idx ON pushers_aggregate (is_enabled);
-CREATE INDEX IF NOT EXISTS pushers_aggregate_app_id_idx ON pushers_aggregate (app_id);
-CREATE INDEX IF NOT EXISTS pushers_aggregate_instance_idx ON pushers_aggregate (instance);
-*/
-CREATE INDEX IF NOT EXISTS pushers_aggregate_kind_idx ON pushers_aggregate (kind);
-
-
 
 
 /** Accounts data aggregate data 
