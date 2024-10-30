@@ -46,7 +46,7 @@ CREATE INDEX IF NOT EXISTS user_visit_user_id_visit_ts_idx ON user_daily_visits 
 */
 /*
 trop lourde, fonctionne mal
-*/
+
 CREATE MATERIALIZED VIEW IF NOT EXISTS daily_unique_user_count AS
 SELECT
   date_trunc('day', visit_ts) AS day,
@@ -92,10 +92,10 @@ GROUP BY
   domain;
   
 CREATE INDEX IF NOT EXISTS idx_daily_unique_user_count_day ON daily_unique_user_count(day);
+*/
 
 
-
-/* a quoi sert cette vue? */ 
+/* a quoi sert cette vue? 
 CREATE MATERIALIZED VIEW IF NOT EXISTS unique_user_daily_count_30d AS
 WITH date_range AS (
   SELECT generate_series(
@@ -129,7 +129,7 @@ SELECT
   unique_user_count
 FROM
   unique_users_per_day;
-
+*/ 
 
 /** Pushers aggregate data 
 user_name, device_id, app_id, kind, enabled, instance, domain
@@ -150,11 +150,14 @@ CREATE UNIQUE INDEX IF NOT EXISTS pushers_aggregate_unique ON pushers_aggregate 
 CREATE INDEX IF NOT EXISTS pushers_aggregate_kind_idx ON pushers_aggregate (kind);
 
 /*
+/* unused so far
 CREATE INDEX IF NOT EXISTS pushers_aggregate_domain_idx ON pushers_aggregate (domain);
 CREATE INDEX IF NOT EXISTS pushers_aggregate_is_enabled_idx ON pushers_aggregate (is_enabled);
 CREATE INDEX IF NOT EXISTS pushers_aggregate_app_id_idx ON pushers_aggregate (app_id);
 CREATE INDEX IF NOT EXISTS pushers_aggregate_instance_idx ON pushers_aggregate (instance);
 */
+CREATE INDEX IF NOT EXISTS pushers_aggregate_kind_idx ON pushers_aggregate (kind);
+
 
 
 

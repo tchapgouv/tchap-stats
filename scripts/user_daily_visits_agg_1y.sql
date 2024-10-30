@@ -44,21 +44,19 @@ FROM
 WHERE 
   visit_ts >= NOW() - INTERVAL '1 year'
 GROUP BY
-  date_trunc('day', visit_ts),
+  date_trunc('day', visit_ts), /* todo : remove date_trunc because index is not used */
   user_id,
   instance,
   domain;
 
-
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_instance ON user_daily_visits_agg_1y (instance);
+/* not used so far
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_user_id ON user_daily_visits_agg_1y (user_id);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_day ON user_daily_visits_agg_1y (day);
-CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_instance ON user_daily_visits_agg_1y (instance);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_domain ON user_daily_visits_agg_1y (domain);
-
-/* index on counts */
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_visits_count ON user_daily_visits_agg_1y (visits_count);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_web_visits_count ON user_daily_visits_agg_1y (web_visits_count);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_mobile_visits_count ON user_daily_visits_agg_1y (mobile_visits_count);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_other_visits_count ON user_daily_visits_agg_1y (other_visits_count);
-
+*/
 REFRESH MATERIALIZED VIEW user_daily_visits_agg_1y;

@@ -11,12 +11,7 @@ CREATE TABLE IF NOT EXISTS user_monthly_visits_lite (
 );
 
 create UNIQUE INDEX IF NOT EXISTS user_monthly_visits_lite_unique ON user_monthly_visits_lite (user_id, visit_ts);
-CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_user_id ON user_monthly_visits_lite USING HASH (user_id);
-CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_month ON user_monthly_visits_lite (visit_ts);
-CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_instance ON user_monthly_visits_lite USING HASH(instance);
-CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_domain ON user_monthly_visits_lite USING HASH(domain);
 CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_month_instance ON user_monthly_visits_lite (visit_ts, instance);
-CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_month_domain ON user_monthly_visits_lite (visit_ts, domain);
 
 /* insert data of the last 30 days */ 
 INSERT INTO user_monthly_visits_lite (user_id, visit_ts, instance, domain) 
