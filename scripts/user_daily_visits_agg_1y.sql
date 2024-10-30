@@ -49,8 +49,8 @@ GROUP BY
   instance,
   domain;
 
-CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_instance ON user_daily_visits_agg_1y (instance);
 /* not used so far
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_instance ON user_daily_visits_agg_1y (instance);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_user_id ON user_daily_visits_agg_1y (user_id);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_day ON user_daily_visits_agg_1y (day);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_1y_domain ON user_daily_visits_agg_1y (domain);
