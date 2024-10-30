@@ -1,3 +1,10 @@
+WITH batch AS (
+    SELECT user_id, device_id, visit_ts
+    FROM user_daily_visits
+    where platform <> 'Autre' and device_id <> 'Autre'
+    LIMIT 1000
+)
+
 UPDATE user_daily_visits
 SET platform =
 CASE
@@ -36,4 +43,15 @@ CASE
     WHEN user_agent LIKE 'Element%' THEN 'Element'
     ELSE 'Autre'
 END
-WHERE platform IS NULL OR device_type IS NULL;
+FROM batch 
+WHERE user_daily_visits.device_id = batch.device_id AND user_daily_visits.user_id = batch.user_id AND user_daily_visits.visit_ts = batch.visit_ts;
+
+/* 
+ BATCH : 1000 record : 1.19s
+ BATCH : 10000 record : 12s
+ BATCH : 20000 record : 23s
+
+ BATCH avec conditions platform <> 'Autre' and device_id <> 'Autre': 
+  1000 record : 1m40
+
+*/ 
