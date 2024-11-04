@@ -17,6 +17,5 @@ CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_month_instance ON user_month
 INSERT INTO user_monthly_visits_lite (user_id, visit_ts, instance, domain) 
 SELECT DISTINCT ON (user_id, DATE_TRUNC('month', visit_ts)) user_id, DATE_TRUNC('month', visit_ts), instance, domain
 FROM user_daily_visits udv
-WHERE udv.visit_ts >= CURRENT_DATE - INTERVAL '30 days'
-AND udv.platform <> 'Autre' AND udv.device_type <> 'Autre' /* exclude non user data */
+WHERE udv.visit_ts >= CURRENT_DATE - INTERVAL '30 days' AND udv.device_type <> 'Autre' /* exclude non user data */
 ON CONFLICT(user_id, visit_ts) DO NOTHING;
