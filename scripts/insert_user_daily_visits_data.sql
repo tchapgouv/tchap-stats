@@ -9,8 +9,7 @@ CREATE TEMPORARY TABLE user_daily_visits_temp (
 );
 
 -- Step 2: Copy the data from the CSV file into the temporary table
-\COPY user_daily_visits_temp(user_id, device_id, visit_ts, user_agent, instance, domain)
-FROM '/app/user_daily_visits.csv' DELIMITER ',' CSV HEADER;
+\COPY user_daily_visits_temp(user_id, device_id, visit_ts, user_agent, instance, domain) FROM '/app/user_daily_visits.csv' DELIMITER ',' CSV HEADER;
 
 -- Step 3: Insert data from the temporary table into the main table
 -- The 'added_date' column will receive the value from 'visit_ts'
