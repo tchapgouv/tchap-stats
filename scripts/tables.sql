@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS user_daily_visits (
   domain VARCHAR NOT NULL,
   platform VARCHAR, /* can be null */
   device_type VARCHAR /* can be null */
+  visit_date DATE /* can be null */
 );
 
 /* tables have been altered */ 
@@ -44,6 +45,9 @@ ADD COLUMN platform VARCHAR;
 
 ALTER TABLE user_daily_visits
 ADD COLUMN device_type VARCHAR;
+
+ALTER TABLE user_daily_visits
+ADD COLUMN visit_date DATE;
 
 */
 
