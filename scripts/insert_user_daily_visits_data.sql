@@ -2,7 +2,7 @@
 CREATE TEMPORARY TABLE user_daily_visits_temp (
   user_id VARCHAR, 
   device_id VARCHAR, 
-  visit_ts DATE, 
+  visit_ts timestamp with time zone, 
   user_agent VARCHAR, 
   instance VARCHAR, 
   domain VARCHAR
