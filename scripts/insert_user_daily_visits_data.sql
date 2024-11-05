@@ -24,6 +24,6 @@ SELECT
   domain, 
   visit_ts -- Use 'visit_ts' as the value for the 'added_date' column
 FROM user_daily_visits_temp udvt
-WHERE 
-  udvt.visit_ts >= NOW() - INTERVAL '30 days' -- Only insert records from the last 30 days
+-- WHERE 
+--  udvt.visit_ts >= NOW() - INTERVAL '30 days' -- Only insert records from the last 30 days, commented because it complicates testing
 ON CONFLICT DO NOTHING; -- Ignore records that already exist (handle unique constraint conflicts)
