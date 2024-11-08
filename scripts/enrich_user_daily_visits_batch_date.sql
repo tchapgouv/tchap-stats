@@ -3,7 +3,7 @@ DECLARE
     batch_size INT := 10000;        -- Taille de chaque batch
     rows_affected INT := 0;      -- Nombre de lignes affectées par batch
     total_rows_updated INT := 0; -- Compteur de lignes mises à jour au total
-    max_row INT := 10;          -- Nombre maximum de lignes à traiter
+    max_row INT := 1000000;          -- Nombre maximum de lignes à traiter
     start_time TIMESTAMP;        -- Heure de début de l'exécution
     end_time TIMESTAMP;          -- Heure de fin de l'exécution
     elapsed_time INTERVAL;       -- Intervalle du temps écoulé
@@ -29,6 +29,8 @@ BEGIN
 
         -- Augmenter le compteur total avec le nombre de lignes mises à jour
         total_rows_updated := total_rows_updated + rows_affected;
+
+        RAISE NOTICE 'rows updated: %/%', total_rows_updated, max_row;
 
         -- Sortir de la boucle si aucune ligne n'a été affectée (c'est-à-dire, tout a été mis à jour)
         EXIT WHEN rows_affected = 0;
