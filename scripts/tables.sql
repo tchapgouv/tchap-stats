@@ -54,16 +54,6 @@ CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_idx ON user_daily_visits (us
 CREATE INDEX IF NOT EXISTS user_daily_visit_ts_idx ON user_daily_visits (visit_ts);
 CREATE INDEX IF NOT EXISTS user_visit_user_id_visit_ts_idx ON user_daily_visits (user_id, visit_ts);
 
-/* ajouter des colonnes */
-ALTER TABLE user_daily_visits
-ADD COLUMN platform VARCHAR;
-
-/* ajouter des colonnes */
-ALTER TABLE user_daily_visits
-ADD COLUMN device_type VARCHAR;
-
-
-
 /*
    vue matérialisée qui agrege les données de user_daily_visits par utilisateur et par jour
    le refresh dure quelques heures
