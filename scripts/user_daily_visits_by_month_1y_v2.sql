@@ -2,7 +2,7 @@
    vue matérialisée qui agrege les données de user_daily_visits par device et par  utilisateur et par mois
    utilisée par le dashboard public
 */
-/* DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_by_month_1y; */
+/* DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_by_month_1y_v2; */
 
 /** User Monthly Visits **/
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_by_month_1y_v2 AS
@@ -33,4 +33,4 @@ CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_domain ON user_daily
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_device_type ON user_daily_visits_by_month_1y_v2 (device_type);
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_platform ON user_daily_visits_by_month_1y_v2 (platform);
 
-REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y; 
+REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y_v2; 
