@@ -23,7 +23,8 @@ GROUP BY
   instance, 
   domain, 
   device_type, 
-  platform;
+  platform,
+  user_agent;
 
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_month ON user_daily_visits_by_month_1y_v2 (month);
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_device_id ON user_daily_visits_by_month_1y_v2 (device_id);
