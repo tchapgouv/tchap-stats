@@ -22,23 +22,37 @@ CREATE UNIQUE INDEX IF NOT EXISTS unique_events_idx ON events_aggregate (domain,
 -- Index on event datetime, increasing select performance
 CREATE INDEX IF NOT EXISTS events_aggregate_hour_to_week ON events_aggregate (hour);
 
-/** User Daily Visits **/
+/** User Daily Visits 
+* in fact it is more device daily visits as one line links to a device_id
+**/
 CREATE TABLE IF NOT EXISTS user_daily_visits (
   user_id VARCHAR NOT NULL,
   device_id VARCHAR NOT NULL,
   visit_ts timestamp with time zone NOT NULL,
   user_agent VARCHAR NOT NULL,
   instance VARCHAR NOT NULL,
-  domain VARCHAR NOT NULL
+  domain VARCHAR NOT NULL,
+  platform VARCHAR, /* can be null */
+  device_type VARCHAR /* can be null */
 );
+
+/* tables have been altered */ 
+/* 
+
+ALTER TABLE user_daily_visits
+ADD COLUMN platform VARCHAR;
+
+ALTER TABLE user_daily_visits
+ADD COLUMN device_type VARCHAR;
+
+*/
+
+
+
 
 CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_idx ON user_daily_visits (user_id, device_id, visit_ts);
 CREATE INDEX IF NOT EXISTS user_daily_visit_ts_idx ON user_daily_visits (visit_ts);
 CREATE INDEX IF NOT EXISTS user_visit_user_id_visit_ts_idx ON user_daily_visits (user_id, visit_ts);
-
-
-
-
 
 /*
    vue matérialisée qui agrege les données de user_daily_visits par utilisateur et par jour

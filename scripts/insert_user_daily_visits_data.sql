@@ -6,6 +6,8 @@ CREATE TEMPORARY TABLE user_daily_visits_temp (user_id VARCHAR, device_id VARCHA
 
 INSERT INTO user_daily_visits
 SELECT *
-FROM user_daily_visits_temp
+FROM user_daily_visits_temp udvt
+WHERE 
+  udvt.visit_ts >= NOW() - INTERVAL '3 days' -- insert only 3 days of history to speed up
 ON CONFLICT DO NOTHING
 
