@@ -51,8 +51,7 @@ ADD COLUMN device_type VARCHAR;
 
 
 CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_idx ON user_daily_visits (user_id, device_id, visit_ts);
-CREATE INDEX IF NOT EXISTS user_daily_visit_ts_idx ON user_daily_visits (visit_ts);
-CREATE INDEX IF NOT EXISTS user_visit_user_id_visit_ts_idx ON user_daily_visits (user_id, visit_ts);
+CREATE INDEX IF NOT EXISTS user_daily_visits_visit_ts_desc_idx ON user_daily_visits (visit_ts DESC);
 
 /*
    vue matérialisée qui agrege les données de user_daily_visits par utilisateur et par jour
