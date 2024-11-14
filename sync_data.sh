@@ -36,8 +36,8 @@ user_daily_visits_pipeline() {
     echo "Insert User Daily Visits"
     time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
     time ./sync_enrich_user_daily_visits.sh
-    time ./sync_large_views_user_daily_visits.sh
     time ./sync_views_user_daily_visits.sh
+    time ./sync_large_views_user_daily_visits.sh
     echo "======== FINISHED user_daily_visits PIPELINE AT $(date) ========"
 }
 
