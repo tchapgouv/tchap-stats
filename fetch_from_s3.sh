@@ -5,8 +5,8 @@ echo "Start fetch_from_s3.sh"
 
 # Get filename from argument
 filename_without_extension=$1
-today=$2
-filename=${filename_without_extension}_${today}.csv
+day=$2
+filename=${filename_without_extension}_${day}.csv
 echo "file to download : $filename"
 
 bucket="${S3_BUCKET_NAME}"
@@ -35,4 +35,4 @@ cp $filename ${filename_without_extension}.csv
 
 numlines=`wc -l ${filename_without_extension}.csv`
 
-echo "Done with fetch_from_s3 $filename_without_extension $today - number of lines $numlines"
+echo "Done with fetch_from_s3 $filename_without_extension $day - number of lines $numlines"
