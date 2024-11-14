@@ -10,8 +10,9 @@
 echo "Sync_views.sh"
 echo "Starting job. Should display 'Done' when done, if there were no errors."
 
-echo "Recreate Materialized View : user_daily_visits_agg_1y "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_1y.sql
+# not used, 6,6Go of data, deleted
+# echo "Recreate Materialized View :  "
+# time psql -d $DATABASE_URL -f scripts/user_daily_visits_auser_daily_visits_agg_1ygg_1y.sql
 
 echo "Recreate Materialized View : user_daily_visits_by_month_1y.sql "
 time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y.sql
