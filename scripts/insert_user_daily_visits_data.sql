@@ -1,13 +1,28 @@
-/* Insert data from the csv file into the DB. Some of the data will be already present in the DB, they will be ignored. */
+-- Step 1: Create a temporary table to store the data loaded from the CSV file
+CREATE TEMPORARY TABLE user_daily_visits_temp (
+  user_id VARCHAR, 
+  device_id VARCHAR, 
+  visit_ts timestamp with time zone, 
+  user_agent VARCHAR, 
+  instance VARCHAR, 
+  domain VARCHAR
+);
 
-CREATE TEMPORARY TABLE user_daily_visits_temp (user_id VARCHAR, device_id VARCHAR, visit_ts timestamp with time zone, user_agent VARCHAR, instance VARCHAR, domain VARCHAR);
-
+-- Step 2: Copy the data from the CSV file into the temporary table
 \COPY user_daily_visits_temp(user_id, device_id, visit_ts, user_agent, instance, domain) FROM '/app/user_daily_visits.csv' DELIMITER ',' CSV HEADER;
 
-INSERT INTO user_daily_visits
-SELECT *
+-- Step 3: Insert data from the temporary table into the main table
+-- The 'added_date' column will receive the value from 'visit_ts'
+INSERT INTO user_daily_visits(user_id, device_id, visit_ts, user_agent, instance, domain, visit_date)
+SELECT 
+  user_id, 
+  device_id, 
+  visit_ts, 
+  user_agent, 
+  instance, 
+  domain, 
+  visit_ts -- Use 'visit_ts' as the value for the 'added_date' column
 FROM user_daily_visits_temp udvt
-WHERE 
-  udvt.visit_ts >= NOW() - INTERVAL '3 days' -- insert only 3 days of history to speed up
-ON CONFLICT DO NOTHING
-
+-- WHERE 
+--  udvt.visit_ts >= NOW() - INTERVAL '30 days' -- Only insert records from the last 30 days, commented because it complicates testing
+ON CONFLICT DO NOTHING; -- Ignore records that already exist (handle unique constraint conflicts)
