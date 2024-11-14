@@ -21,7 +21,7 @@ BEGIN
             LIMIT batch_size
         )
         UPDATE user_daily_visits
-        SET visit_date = visit_ts::date;
+        SET visit_date = visit_ts::date
         WHERE ctid IN (SELECT ctid FROM batch);
 
         -- Récupérer le nombre de lignes affectées par cette mise à jour
