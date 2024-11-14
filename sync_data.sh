@@ -27,6 +27,9 @@ echo "Fetch S3 user_daily_visits $extract_date"
 time ./fetch_from_s3.sh user_daily_visits $extract_date
 echo "Insert User Daily Visits"
 time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
+time ./sync_enrich_user_daily_visits.sh
+time ./sync_large_views_user_daily_visits.sh
+time ./sync_views_user_daily_visits.sh
 
 ## SUBSCRIPTIONS
 echo "Fetch S3 subscriptions_aggregate"
@@ -60,11 +63,6 @@ echo "Fetch S3 crisp_conversation_segments $extract_date"
 time ./fetch_from_s3.sh crisp_conversation_segments $extract_date
 echo "Insert crisp conversations segments"
 time psql -d $DATABASE_URL -f scripts/insert_crisp_conversation_segments.sql
-
-
-
-
-
 
 echo "Done !"
 
