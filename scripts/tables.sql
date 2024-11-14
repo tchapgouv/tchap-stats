@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS user_daily_visits (
   instance VARCHAR NOT NULL,
   domain VARCHAR NOT NULL,
   platform VARCHAR, /* can be null */
-  device_type VARCHAR /* can be null */
+  device_type VARCHAR, /* can be null */
   visit_date DATE /* can be null */
 );
 
