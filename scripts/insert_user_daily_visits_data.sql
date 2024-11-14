@@ -13,7 +13,6 @@ CREATE TEMPORARY TABLE user_daily_visits_temp (
 
 -- Step 3: Insert data from the temporary table into the main table
 -- The 'added_date' column will receive the value from 'visit_ts'
--- Entries from the last 30 days are inserted; duplicates are ignored
 INSERT INTO user_daily_visits(user_id, device_id, visit_ts, user_agent, instance, domain, visit_date)
 SELECT 
   user_id, 
