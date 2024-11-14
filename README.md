@@ -78,6 +78,13 @@ time ./fetch_from_s3.sh user_daily_visits $extract_date
 time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
 ```
 
+### run a pipeline manually
+
+example : execute pipeline user_daily_visits on 2024-11-14 data
+```
+bash ./sync_data.sh 2024-11-14 user_daily_visits
+```
+
 ## activate cron and deacticate web ps
 do not work with review app
 
