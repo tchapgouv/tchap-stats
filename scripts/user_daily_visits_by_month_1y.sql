@@ -55,7 +55,7 @@ GROUP BY
   instance, 
   domain, 
   device_type, 
-  platform;
+  platform; --psql is complaining that user_agent should be in the GROUP BY condition, it does have an impact on the number of lines in the materialized view. but the REFRESH works, leave it like this for the moment
 
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_by_month_1y_month ON user_daily_visits_by_month_1y (month);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_by_month_1y_device_id ON user_daily_visits_by_month_1y (device_id);
