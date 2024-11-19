@@ -56,6 +56,8 @@ ADD COLUMN visit_date DATE;
 
 CREATE UNIQUE INDEX IF NOT EXISTS unique_user_daily_idx ON user_daily_visits (user_id, device_id, visit_ts);
 CREATE INDEX IF NOT EXISTS user_daily_visits_visit_ts_desc_idx ON user_daily_visits (visit_ts DESC);
+CREATE INDEX IF NOT EXISTS user_daily_visits_visit_date_desc_idx ON user_daily_visits (visit_ts DESC);
+
 /* test index to speed up invalid data retrieval */ 
 CREATE INDEX IF NOT EXISTS user_daily_visits_platform_null_idx ON user_daily_visits (platform) WHERE platform IS NULL;
 

@@ -54,3 +54,22 @@ WHERE udv.visit_ts >= '2024-01-01'
   AND udv.visit_ts < '2025-01-01'
   AND udv.device_type <> 'Autre'
 ON CONFLICT (user_id, visit_ts) DO NOTHING;
+
+/* remove data for 2024 */ 
+DELETE * 
+FROM user_monthly_visits_lite
+WHERE user_monthly_visits_lite.visit_ts >= '2024-01-01'
+  AND user_monthly_visits_lite.visit_ts < '2025-01-01'
+
+/* add data for year 2024 based on visit_date instead of visit_ts*/
+INSERT INTO user_monthly_visits_lite (user_id, visit_ts, instance, domain)
+SELECT DISTINCT ON (user_id, DATE_TRUNC('month', visit_date))
+    user_id, 
+    DATE_TRUNC('month', visit_date) AS visit_date, 
+    instance, 
+    domain
+FROM user_daily_visits udv
+WHERE udv.visit_date >= '2024-01-01'
+  AND udv.visit_date < '2025-01-01'
+  AND udv.device_type <> 'Autre'
+ON CONFLICT (user_id, visit_ts) DO NOTHING;
