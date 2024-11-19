@@ -10,7 +10,7 @@
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_by_month_1y_v3 AS
 SELECT 
   device_id,
-  date_trunc('month', visit_date) as month,
+  date_trunc('month'::text, visit_date::timestamp without time zone)::date as month,
   user_id,
   instance,
   domain,
