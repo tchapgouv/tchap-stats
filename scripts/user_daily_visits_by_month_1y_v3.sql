@@ -29,7 +29,7 @@ GROUP BY
   instance, 
   domain, 
   device_type,
-  platform
+  platform;
 
 REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y_v3; 
 
