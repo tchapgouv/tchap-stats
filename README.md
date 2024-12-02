@@ -60,6 +60,7 @@ scalingo -a tchap-stats-prod db-tunnel --region osc-secnum-fr1 SCALINGO_POSTGRES
 ```bash
 scalingo -a tchap-stats-preprod db-tunnel SCALINGO_POSTGRESQL_URL
 ```
+
 You can access your database on:
 127.0.0.1:10000
 
