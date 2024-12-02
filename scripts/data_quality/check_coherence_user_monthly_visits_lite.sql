@@ -1,3 +1,5 @@
+SET work_mem = '2GB'; -- Ajustez selon la quantité de RAM disponible
+
 WITH original_visits AS (
   -- Première requête sur user_monthly_visits_lite
   SELECT
@@ -6,7 +8,7 @@ WITH original_visits AS (
   FROM
     "public"."user_monthly_visits_lite"
   WHERE
-    "public"."user_monthly_visits_lite"."visit_date" >= DATE_TRUNC('month', NOW() + INTERVAL '-5 month')
+    "public"."user_monthly_visits_lite"."visit_date" >= DATE_TRUNC('month', NOW() + INTERVAL '-3 month')
     AND "public"."user_monthly_visits_lite"."visit_date" < NOW()
   GROUP BY
     month
@@ -20,7 +22,7 @@ v0_visits AS (
   FROM 
     "public"."user_daily_visits" udv
   WHERE 
-    udv.visit_date >= DATE_TRUNC('month', NOW() + INTERVAL '-5 month')                     
+    udv.visit_date >= DATE_TRUNC('month', NOW() + INTERVAL '-3 month')                     
     AND udv.visit_date < NOW()
     AND udv.device_type <> 'Autre'
   GROUP BY 
