@@ -3,6 +3,7 @@
    utilisée par le dashboard public
 */
 /* DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_by_month_1y_v2; */
+SET work_mem = '2GB'; -- Ajustez selon la quantité de RAM disponible
 
 /** User Monthly Visits **/
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_by_month_1y_v2 AS

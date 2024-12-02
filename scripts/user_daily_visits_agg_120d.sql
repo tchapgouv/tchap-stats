@@ -2,6 +2,7 @@
    vue matérialisée qui agrege les données de user_daily_visits par utilisateur, par jour sur les 120 derniers jours (4 mois)
 */
 /* DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_agg_120d; */
+SET work_mem = '2GB'; -- Ajustez selon la quantité de RAM disponible
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_agg_120d AS
 SELECT

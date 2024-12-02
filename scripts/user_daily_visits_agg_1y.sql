@@ -1,4 +1,5 @@
 /* deprecated, not used, deleted in production */
+SET work_mem = '2GB'; -- Ajustez selon la quantité de RAM disponible
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_agg_1y AS
 SELECT

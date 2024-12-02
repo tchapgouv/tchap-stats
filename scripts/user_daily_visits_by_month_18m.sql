@@ -2,6 +2,7 @@
    vue matérialisée qui agrege les données de user_daily_visits par device et par utilisateur et par mois sur 18 mois
 */
 /* DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_by_month_18m; */
+SET work_mem = '2GB'; -- Ajustez selon la quantité de RAM disponible
 
 /** User Monthly Visits **/
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_by_month_18m AS

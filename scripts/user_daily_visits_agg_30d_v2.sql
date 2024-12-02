@@ -1,6 +1,7 @@
 /*
    vue matérialisée qui agrege les données de user_daily_visits par utilisateur, par jour sur les 30 derniers jours
 */
+SET work_mem = '2GB'; -- Ajustez selon la quantité de RAM disponible
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_agg_30d_v2 AS
 SELECT
