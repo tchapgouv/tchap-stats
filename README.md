@@ -52,20 +52,26 @@ Access the database
 Add your public ssh key to your scalingo profile
 ## Create a local tunnel 
 - prod
-```
+```bash
 scalingo -a tchap-stats-prod db-tunnel --region osc-secnum-fr1 SCALINGO_POSTGRESQL_URL
 ```
 
 - preprod
-```
+```bash
 scalingo -a tchap-stats-preprod db-tunnel SCALINGO_POSTGRESQL_URL
 ```
 You can access your database on:
 127.0.0.1:10000
 
 ## Connect to the machine
-```
+- prod
+```bash
 scalingo --region osc-secnum-fr1 -a tchap-stats-prod run bash 
+```
+
+- preprod
+```bash
+scalingo -a tchap-stats-preprod run bash 
 ```
 
 ### run an import manually 
