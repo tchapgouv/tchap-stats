@@ -38,6 +38,7 @@ user_daily_visits_pipeline() {
     time ./sync_enrich_user_daily_visits.sh
     time ./sync_views_user_daily_visits.sh
     time ./sync_large_views_user_daily_visits.sh
+    time ./sync_check_data_user_daily_visits.sh
     echo "======== FINISHED user_daily_visits PIPELINE AT $(date) ========"
 }
 

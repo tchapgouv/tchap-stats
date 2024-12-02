@@ -29,7 +29,9 @@ GROUP BY
   instance, 
   domain, 
   device_type,
-  platform
+  platform;
+
+REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y_v3; 
 
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v3_month ON user_daily_visits_by_month_1y_v3 (month);
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v3_device_id ON user_daily_visits_by_month_1y_v3 (device_id);
@@ -39,4 +41,3 @@ CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v3_domain ON user_daily
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v3_device_type ON user_daily_visits_by_month_1y_v3 (device_type);
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v3_platform ON user_daily_visits_by_month_1y_v3 (platform);
 
-REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y_v3; 

@@ -27,6 +27,8 @@ GROUP BY
   platform,
   user_agent;
 
+REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y_v2; 
+
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_month ON user_daily_visits_by_month_1y_v2 (month);
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_device_id ON user_daily_visits_by_month_1y_v2 (device_id);
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_user_id ON user_daily_visits_by_month_1y_v2 (user_id);
@@ -35,4 +37,3 @@ CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_domain ON user_daily
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_device_type ON user_daily_visits_by_month_1y_v2 (device_type);
 CREATE INDEX IF NOT EXISTS user_daily_visits_by_month_1y_v2_platform ON user_daily_visits_by_month_1y_v2 (platform);
 
-REFRESH MATERIALIZED VIEW user_daily_visits_by_month_1y_v2; 

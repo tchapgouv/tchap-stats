@@ -1,3 +1,5 @@
+SET work_mem = '2GB'; -- Ajustez selon la quantité de RAM disponible
+
 WITH udv_b_m_visits AS (
   -- requête sur user_daily_visits_by_month_1y_v3
   SELECT
@@ -20,7 +22,7 @@ v0_visits AS (
   FROM 
     "public"."user_daily_visits" udv
   WHERE 
-    udv.visit_date >= DATE_TRUNC('month', NOW() + INTERVAL '-5 month')                     
+    udv.visit_date >= DATE_TRUNC('month', NOW() + INTERVAL '-3 month')                     
     AND udv.visit_date < NOW()
     AND udv.device_type <> 'Autre'
   GROUP BY 
