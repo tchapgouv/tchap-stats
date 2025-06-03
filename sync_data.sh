@@ -78,6 +78,15 @@ account_data_pipeline() {
     echo "======== FINISHED account_data PIPELINE AT $(date) ========"
 }
 
+sso_pipeline() {
+    echo "======== STARTING sso PIPELINE AT $(date) ========"
+    echo "Fetch S3 sso $extract_date"
+    time ./fetch_from_s3.sh sso $extract_date
+    echo "Insert SSO Data"
+    time psql -d $DATABASE_URL -f scripts/insert_sso_data.sql
+    echo "======== FINISHED sso PIPELINE AT $(date) ========"
+}
+
 crisp_pipeline() {
     echo "======== STARTING crisp PIPELINE AT $(date) ========"
     echo "Fetch S3 crisp_conversation_segments $extract_date"
@@ -104,6 +113,7 @@ execute_pipeline "subscriptions"
 execute_pipeline "events"
 execute_pipeline "pushers"
 execute_pipeline "account_data"
+execute_pipeline "sso"
 execute_pipeline "crisp"
 
 echo "======== JOB COMPLETED AT $(date) ========"
