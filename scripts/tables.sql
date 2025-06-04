@@ -105,9 +105,9 @@ CREATE TABLE IF NOT EXISTS sso_aggregate (
   total_users INTEGER NOT NULL,
   domain VARCHAR NOT NULL,
   instance VARCHAR NOT NULL,
-  users_legacy INTEGER NOT NULL,
-  users_both_authentication INTEGER NOT NULL,
-  users_proconnect INTEGER NOT NULL,
+  only_pwd INTEGER NOT NULL,
+  pwd_and_prococonnect INTEGER NOT NULL,
+  only_proconnect INTEGER NOT NULL,
   added_date DATE NOT NULL DEFAULT current_date   -- new column to store added date
 );
 

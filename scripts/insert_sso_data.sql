@@ -1,6 +1,5 @@
 /* Insert data from the csv file into the DB. */
-/* If data is already present, update the content field */
-/* user_id	account_data_type	content	instance domain*/
+/* total_users	domain	instance	users_legacy	users_both_authentication	users_proconnect */
 
 CREATE TEMPORARY TABLE sso_aggregate_temp (
 total_users INTEGER,
@@ -11,7 +10,7 @@ users_both_authentication INTEGER,
 users_proconnect INTEGER
 );
 
--- CSV file has fields in this order : user_id	account_data_type	content	instance domain
+-- CSV file has fields in this order : total_users	domain	instance	users_legacy	users_both_authentication	users_proconnect
 -- If it changes, change this line or it will break.
 \copy sso_aggregate_temp(total_users, domain, instance, users_legacy, users_both_authentication, users_proconnect) FROM '/app/sso.csv' DELIMITER ',' CSV HEADER;
 
