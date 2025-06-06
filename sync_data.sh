@@ -87,15 +87,6 @@ sso_pipeline() {
     echo "======== FINISHED sso PIPELINE AT $(date) ========"
 }
 
-crisp_pipeline() {
-    echo "======== STARTING crisp PIPELINE AT $(date) ========"
-    echo "Fetch S3 crisp_conversation_segments $extract_date"
-    time ./fetch_from_s3.sh crisp_conversation_segments $extract_date
-    echo "Insert crisp conversations segments"
-    time psql -d $DATABASE_URL -f scripts/insert_crisp_conversation_segments.sql
-    echo "======== FINISHED crisp PIPELINE AT $(date) ========"
-}
-
 execute_pipeline() {
     pipeline=$1
     if [[ "$selected_pipelines" == "*" || "$selected_pipelines" == *"$pipeline"* ]]; then
@@ -114,6 +105,5 @@ execute_pipeline "events"
 execute_pipeline "pushers"
 execute_pipeline "account_data"
 execute_pipeline "sso"
-execute_pipeline "crisp"
 
 echo "======== JOB COMPLETED AT $(date) ========"

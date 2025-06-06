@@ -9,7 +9,6 @@ Viennent des exports des base de données de Tchap
 * user_daily_visits : données globales de toutes les visites des utilisateurs avec leur type d'appareil. aggrégé par jour. 68 milliard de lignes
 * subscriptions_aggregate : données des nouvelles inscriptions
 * events_aggregate : données des événements matrix
-* crisp_conversation_segments : TODO
 * account_data_aggregate : TODO
 
 ## vues matérialisées (materialized view)
