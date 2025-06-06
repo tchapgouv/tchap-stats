@@ -98,3 +98,21 @@ CREATE INDEX IF NOT EXISTS unique_account_data_aggregate_idx ON account_data_agg
 CREATE INDEX IF NOT EXISTS account_data_aggregate_domain_idx ON account_data_aggregate (domain);
 CREATE INDEX IF NOT EXISTS account_data_aggregate_type_idx ON account_data_aggregate (account_data_type);
 CREATE INDEX IF NOT EXISTS account_data_aggregate_instance_idx ON account_data_aggregate (instance);
+
+/** SSO aggregate data
+**/
+CREATE TABLE IF NOT EXISTS sso_aggregate (
+  total_users INTEGER NOT NULL,
+  domain VARCHAR NOT NULL,
+  instance VARCHAR NOT NULL,
+  only_pwd INTEGER NOT NULL,
+  pwd_and_prococonnect INTEGER NOT NULL,
+  only_proconnect INTEGER NOT NULL,
+  added_date DATE NOT NULL DEFAULT current_date   -- new column to store added date
+);
+
+/* create a unique index to avoid duplicates when importing data */
+CREATE INDEX IF NOT EXISTS unique_sso_aggregate_domain_idx ON sso_aggregate (added_date, domain, instance);
+CREATE INDEX IF NOT EXISTS sso_aggregate_domain_idx ON sso_aggregate (domain);
+CREATE INDEX IF NOT EXISTS sso_aggregate_instance_idx ON sso_aggregate (instance);
+CREATE INDEX IF NOT EXISTS sso_aggregate_added_date_idx ON sso_aggregate (added_date);
