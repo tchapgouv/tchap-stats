@@ -10,14 +10,17 @@
 echo "Sync_views.sh"
 echo "Starting job. Should display 'Done' when done, if there were no errors."
 
-echo "Recreate Materialized View : user_daily_visits_agg_30d "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_30d.sql
+# echo "Recreate Materialized View : user_daily_visits_agg_30d "
+# todo : remove code in 2025 september
+# time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_30d.sql
 
-echo "Recreate Materialized View : user_daily_visits_agg_30d_v2 "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_30d_v2.sql
+# echo "Recreate Materialized View : user_daily_visits_agg_30d_v2 "
+# todo : remove code in 2025 september
+# time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_30d_v2.sql
 
-echo "Recreate Materialized View : user_daily_visits_agg_120d "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_120d.sql
+# echo "Recreate Materialized View : user_daily_visits_agg_120d "
+# todo : remove code in 2025 september
+# time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_120d.sql
 
 echo "Recreate Materialized View : user_daily_visits_agg_120d_v2 "
 time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_120d_v2.sql
