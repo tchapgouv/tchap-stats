@@ -11,21 +11,25 @@ echo "Sync_views.sh"
 echo "Starting job. Should display 'Done' when done, if there were no errors."
 
 # not used, 6,6Go of data, deleted
-# echo "Recreate Materialized View :  "
+# echo "Recreate Materialized View :  
+# todo : remove code in 2025 september"
 # time psql -d $DATABASE_URL -f scripts/user_daily_visits_auser_daily_visits_agg_1ygg_1y.sql
 
-echo "Recreate Materialized View : user_daily_visits_by_month_1y.sql "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y.sql
+# echo "Recreate Materialized View : user_daily_visits_by_month_1y.sql "
+# deactivate because no need
+# todo : remove code in 2025 september
+# time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y.sql
 
-echo "Recreate Materialized View : user_daily_visits_by_month_1y_v2.sql "
-time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y_v2.sql
+# echo "Recreate Materialized View : user_daily_visits_by_month_1y_v2.sql "
+# todo : remove code in 2025 september
+# time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y_v2.sql
 
 echo "Recreate Materialized View : user_daily_visits_by_month_1y_v3.sql "
 time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y_v3.sql
 
 # deactivate because it is too big : https://github.com/tchapgouv/tchap-stats/issues/73
-#echo "Recreate Materialized View : user_daily_visits_by_month_18m"
-#time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_18m.sql
+# echo "Recreate Materialized View : user_daily_visits_by_month_18m"
+# time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_18m.sql
 
 #echo "Refresh Materialized View"
 #time psql -d $DATABASE_URL -f scripts/refresh_materialized_view.sql
