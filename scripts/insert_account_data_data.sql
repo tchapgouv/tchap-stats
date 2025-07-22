@@ -9,7 +9,15 @@ CREATE TEMPORARY TABLE account_data_aggregate_temp (user_id VARCHAR, account_dat
 \copy account_data_aggregate_temp(user_id, account_data_type, content, instance, domain) FROM '/app/account_data.csv' DELIMITER ',' CSV HEADER;
 
 
-INSERT INTO account_data_aggregate(user_id, account_data_type, content, instance, domain)
-SELECT user_id, account_data_type, content c, instance, domain
+-- deduplicate data before inserting in the aggregate
+-- when multiple values of content are present in the file, we keep only one randomly
+CREATE TEMPORARY TABLE account_data_aggregate_deduplicated AS
+SELECT DISTINCT ON (user_id, account_data_type) 
+    user_id, account_data_type, content, instance, domain
 FROM account_data_aggregate_temp
+ORDER BY user_id, account_data_type, content;
+
+INSERT INTO account_data_aggregate(user_id, account_data_type, content, instance, domain)
+SELECT user_id, account_data_type, content, instance, domain
+FROM account_data_aggregate_deduplicated
 ON CONFLICT (user_id, account_data_type) DO update set content=EXCLUDED.content;
