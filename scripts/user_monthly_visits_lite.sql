@@ -10,11 +10,8 @@ CREATE TABLE IF NOT EXISTS user_monthly_visits_lite (
   domain VARCHAR NOT NULL
 );
 
-create UNIQUE INDEX IF NOT EXISTS user_monthly_visits_lite_unique ON user_monthly_visits_lite (user_id, visit_ts);
-CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_month_instance ON user_monthly_visits_lite (visit_ts, instance);
-/*
-ALTER TABLE public.user_monthly_visits_lite RENAME COLUMN visit_ts TO visit_date;
-*/
+CREATE UNIQUE INDEX IF NOT EXISTS user_monthly_visits_lite_unique ON user_monthly_visits_lite (user_id, visit_date);
+CREATE INDEX IF NOT EXISTS user_monthly_visits_lite_month_instance ON user_monthly_visits_lite (visit_date, instance);
 
 /* insert data of the last 30 days */ 
 INSERT INTO user_monthly_visits_lite (user_id, visit_date, instance, domain)
