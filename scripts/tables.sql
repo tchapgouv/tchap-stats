@@ -1,4 +1,5 @@
 /** Subscription **/
+/* deprecated */ 
 CREATE TABLE IF NOT EXISTS subscriptions_aggregate (
   subscriptions INTEGER NOT NULL,
   domain VARCHAR NOT NULL,
@@ -6,6 +7,7 @@ CREATE TABLE IF NOT EXISTS subscriptions_aggregate (
   instance VARCHAR NOT NULL
 );
 
+/* deprecated */ 
 CREATE UNIQUE INDEX IF NOT EXISTS unique_subscriptions_idx ON subscriptions_aggregate (domain, hour, instance);
 
 /** Events **/
@@ -116,3 +118,15 @@ CREATE INDEX IF NOT EXISTS unique_sso_aggregate_domain_idx ON sso_aggregate (add
 CREATE INDEX IF NOT EXISTS sso_aggregate_domain_idx ON sso_aggregate (domain);
 CREATE INDEX IF NOT EXISTS sso_aggregate_instance_idx ON sso_aggregate (instance);
 CREATE INDEX IF NOT EXISTS sso_aggregate_added_date_idx ON sso_aggregate (added_date);
+
+
+/** Users **/
+CREATE TABLE IF NOT EXISTS users (
+  user_id VARCHAR NOT NULL, 
+  creation_ts timestamp with time zone NOT NULL,
+  deactivated INTEGER NOT NULL,
+  domain VARCHAR NOT NULL,
+  instance VARCHAR NOT NULL
+);
+
+/* no need for index */
