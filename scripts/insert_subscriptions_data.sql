@@ -1,3 +1,4 @@
+/* deprecated, use users table */
 /* Insert data from the csv file into the DB. Some of the data will be already present in the DB, they will be ignored. */
 
 CREATE TEMPORARY TABLE subscriptions_aggregate_temp (subscriptions INTEGER, domain VARCHAR, hour timestamp with time zone, instance VARCHAR);
