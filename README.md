@@ -9,6 +9,7 @@ Viennent des exports des base de données de Tchap
 * user_daily_visits : données globales de toutes les visites des utilisateurs avec leur type d'appareil. aggrégé par jour. 68 milliard de lignes
 * subscriptions_aggregate : données des nouvelles inscriptions
 * events_aggregate : données des événements matrix
+* crisp_conversation_segments : export des segments crisp, une ligne par segment
 * account_data_aggregate : TODO
 
 ## vues matérialisées (materialized view)
@@ -63,7 +64,7 @@ scalingo -a tchap-stats-preprod db-tunnel SCALINGO_POSTGRESQL_URL
 You can access your database on:
 127.0.0.1:10000
 
-## Connect to the machine
+## Run a container locally
 - prod
 ```bash
 scalingo --region osc-secnum-fr1 -a tchap-stats-prod run bash 

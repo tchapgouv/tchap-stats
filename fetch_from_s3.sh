@@ -3,6 +3,12 @@
 ### Fetch the csv file of stats from S3 bucket.
 echo "Start fetch_from_s3.sh"
 
+# only for local dev
+if [ -f .env ]; then
+  source .env
+fi
+
+
 # Get filename from argument
 filename_without_extension=$1
 day=$2
@@ -20,8 +26,11 @@ signature_string="GET\n\n${contentType}\n${dateValue}\n${s3path}"
 #prepare signature hash to be sent in Authorization header
 signature_hash=`echo -en ${signature_string} | openssl sha1 -hmac ${S3_SECRET_ACCESS_KEY} -binary | base64`
 
+echo "signature_hash : $signature_hash"
+
+
 destination="https://${bucket}.s3.gra.cloud.ovh.net/${filename}"
-echo $destination
+echo "fetching file from S3 at destination : $destination"
 
 # actual curl command to do GET operation on s3
 curl -k -X GET -o "${filename}"\
