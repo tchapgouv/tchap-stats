@@ -102,7 +102,7 @@ psql -d $DATABASE_URL -f scripts/tables.sql
 execute_pipeline "user_daily_visits"
 execute_pipeline "subscriptions"
 execute_pipeline "events"
-execute_pipeline "pushers"
+#execute_pipeline "pushers" deactivate pushers because it takes 40Go and it is not really used
 execute_pipeline "account_data"
 execute_pipeline "sso"
 
