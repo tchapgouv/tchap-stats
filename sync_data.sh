@@ -1,14 +1,20 @@
 #!/bin/bash
 # Command : 
-# - ./sync_stats.sh [date] [pipeline1,pipeline2,...]
-# - ./sync_stats.sh 2022-08-10 (for date with no specific pipelines)
-# - ./sync_stats.sh 2022-08-10 user_daily_visits,subscriptions (for specific pipelines)
+
+# - ./sync_data.sh [date] [pipeline1,pipeline2,...]
+# - ./sync_data.sh 2022-08-10 (for date with no specific pipelines)
+# - ./sync_data.sh 2022-08-10 user_daily_visits,subscriptions (for specific pipelines)
 
 # Note : DATABASE_URL is automatically created on scalingo machines.
 # For testing :
 # DATABASE_URL=${DATABASE_URL:-'postgresql://stats:stats@localhost:5432/stats'}
 # echo $DATABASE_URL
 echo "Starting job. Should display 'Done' when done, if there were no errors."
+
+# only for local dev
+if [ -f .env ]; then
+  source .env
+fi
 
 extract_date=$1 # date format ie. 2022-08-10
 if [ -z "$extract_date" ]
@@ -25,6 +31,8 @@ if [ -z "$selected_pipelines" ]; then
 fi
 
 echo "Selected pipeline : $selected_pipelines"
+
+echo "Connecting to Database : $DATABASE_URL"
 
 # Set up DB - create table and index
 psql -d $DATABASE_URL -f scripts/tables.sql
@@ -87,6 +95,15 @@ sso_pipeline() {
     echo "======== FINISHED sso PIPELINE AT $(date) ========"
 }
 
+crisp_pipeline() {
+    echo "======== STARTING crisp PIPELINE AT $(date) ========"
+    echo "Fetch S3 crisp_conversation_segments $extract_date"
+    time ./fetch_from_s3.sh crisp_conversation_segments $extract_date
+    echo "Insert crisp conversations segments"
+    time psql -d $DATABASE_URL -f scripts/insert_crisp_conversation_segments.sql
+    echo "======== FINISHED crisp PIPELINE AT $(date) ========"
+}
+
 execute_pipeline() {
     pipeline=$1
     if [[ "$selected_pipelines" == "*" || "$selected_pipelines" == *"$pipeline"* ]]; then
@@ -105,5 +122,6 @@ execute_pipeline "events"
 execute_pipeline "pushers"
 execute_pipeline "account_data"
 execute_pipeline "sso"
+execute_pipeline "crisp"
 
 echo "======== JOB COMPLETED AT $(date) ========"
