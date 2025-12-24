@@ -62,24 +62,6 @@ CREATE INDEX IF NOT EXISTS user_daily_visits_visit_date_desc_idx ON user_daily_v
 CREATE INDEX IF NOT EXISTS user_daily_visits_platform_null_idx ON user_daily_visits (platform) WHERE platform IS NULL;
 
 
-/** Pushers aggregate data 
-user_name, device_id, app_id, kind, enabled, instance, domain
-**/
-CREATE TABLE IF NOT EXISTS pushers_aggregate (
-  user_name VARCHAR NOT NULL,
-  device_id VARCHAR NOT NULL,
-  app_id VARCHAR,
-  kind VARCHAR ,
-  is_enabled BOOLEAN,
-  instance VARCHAR NOT NULL,
-  domain VARCHAR NOT NULL,
-  added_date DATE NOT NULL DEFAULT current_date   -- new column to store added date
-);
-
-/* this unique index is optimized to group on date/kind */
-CREATE UNIQUE INDEX IF NOT EXISTS pushers_aggregate_unique ON pushers_aggregate (added_date, kind, app_id,device_id);
-CREATE INDEX IF NOT EXISTS pushers_aggregate_kind_idx ON pushers_aggregate (kind);
-
 
 
 /** Accounts data aggregate data 
