@@ -1,7 +1,7 @@
 #!/bin/bash
 # Command : 
 
-# - ./sync_data.sh [date] [pipeline1,pipeline2,...]
+# - ./a.sh [date] [pipeline1,pipeline2,...]
 # - ./sync_data.sh 2022-08-10 (for date with no specific pipelines)
 # - ./sync_data.sh 2022-08-10 user_daily_visits,subscriptions (for specific pipelines)
 
@@ -19,7 +19,9 @@ fi
 extract_date=$1 # date format ie. 2022-08-10
 if [ -z "$extract_date" ]
 then
-      extract_date=`date +'%Y-%m-%d'`
+    ##extract_date=`date +'%Y-%m-%d'`
+    #use yersterday date to be sure that the data has arrived from the preivous pipeline
+    extract_date=$(date -d '1 day ago' +'%Y-%m-%d')    
 fi
 
 echo "Extract date : $extract_date"
