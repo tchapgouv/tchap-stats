@@ -1,7 +1,7 @@
 #!/bin/bash
 # Command : 
 
-# - ./a.sh [date] [pipeline1,pipeline2,...]
+# - ./sync_data.sh [date] [pipeline1,pipeline2,...]
 # - ./sync_data.sh 2022-08-10 (for date with no specific pipelines)
 # - ./sync_data.sh 2022-08-10 user_daily_visits,subscriptions (for specific pipelines)
 
