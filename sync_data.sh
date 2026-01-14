@@ -20,7 +20,7 @@ extract_date=$1 # date format ie. 2022-08-10
 if [ -z "$extract_date" ]
 then
     ##extract_date=`date +'%Y-%m-%d'`
-    #use yersterday date to be sure that the data has arrived from the preivous pipeline
+    #use yersterday date to be sure that the data has arrived from the previous pipeline
     extract_date=$(date -d '1 day ago' +'%Y-%m-%d')    
 fi
 
