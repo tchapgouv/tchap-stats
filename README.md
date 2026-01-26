@@ -75,21 +75,14 @@ scalingo --region osc-secnum-fr1 -a tchap-stats-prod run bash
 scalingo -a tchap-stats-preprod run bash 
 ```
 
-### run an import manually 
+### run a pipeline locally
 
-
-```
-# To import the file of the 2024-10-15 of user daily visits
-extract_date=2024-10-15
-time ./fetch_from_s3.sh user_daily_visits $extract_date
-time psql -d $DATABASE_URL -f scripts/insert_user_daily_visits_data.sql
-```
-
-### run a pipeline manually
+We use the official docker image of scalingo to run pipeline locally `docker pull scalingo/scalingo-24:latest`
 
 example : execute pipeline user_daily_visits on 2024-11-14 data
+
 ```
-bash ./sync_data.sh 2024-11-14 user_daily_visits
+docker run --rm -it -v $(pwd):/app -w /app scalingo/scalingo-24:latest ./sync_data.sh 2024-11-14 user_daily_visits
 ```
 
 ## activate cron and deacticate web ps
