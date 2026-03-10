@@ -81,8 +81,10 @@ We use the official docker image of scalingo to run pipeline locally `docker pul
 
 example : execute pipeline user_daily_visits on 2024-11-14 data
 
+When using docker container, change your .env tunnel configuration to use host.docker.internal instead of 127.0.0.1
+
 ```
-docker run --rm -it -v $(pwd):/app -w /app scalingo/scalingo-24:latest ./sync_data.sh 2024-11-14 user_daily_visits
+docker run --rm -it --network=host -v $(pwd):/app -w /app scalingo/scalingo-24:latest ./sync_data.sh 2024-11-14 user_daily_visits
 ```
 
 ## activate cron and deacticate web ps
