@@ -25,6 +25,13 @@ SELECT
     ELSE NULL
   END) AS mobile_visits_count,
   COUNT(CASE
+    WHEN user_agent LIKE 'tchap-windows%' AND
+         user_agent LIKE 'tchap-linux%' AND
+         user_agent LIKE 'tchap-macos%' 
+    THEN 1
+    ELSE NULL
+  END) AS desktop_visits_count,
+  COUNT(CASE
     WHEN user_agent NOT LIKE 'Mozilla%' AND
          user_agent NOT LIKE 'Tchap%Android%' AND
          user_agent NOT LIKE 'RiotNSE/2%iOS%' AND
@@ -33,7 +40,10 @@ SELECT
          user_agent NOT LIKE 'Riot%iOS' AND
          user_agent NOT LIKE 'Riot%Android' AND
          user_agent NOT LIKE 'Element%Android' AND
-         user_agent NOT LIKE 'Element%iOS'
+         user_agent NOT LIKE 'Element%iOS' AND
+         user_agent NOT LIKE 'tchap-windows%' AND
+         user_agent NOT LIKE 'tchap-linux%' AND
+         user_agent NOT LIKE 'tchap-macos%' 
     THEN 1
     ELSE NULL
   END) AS other_visits_count
