@@ -21,7 +21,7 @@ SELECT
   COUNT(CASE
     WHEN platform = 'Desktop' THEN 1
     ELSE NULL
-  END) AS mobile_visits_count,
+  END) AS desktop_visits_count,
   COUNT(CASE
     WHEN platform = 'Autre' THEN 1
     ELSE NULL

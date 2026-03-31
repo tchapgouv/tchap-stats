@@ -69,6 +69,7 @@ CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_30d_domain ON user_daily_vi
 /* index on counts */
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_30d_visits_count ON user_daily_visits_agg_30d (visits_count);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_30d_web_visits_count ON user_daily_visits_agg_30d (web_visits_count);
+CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_30d_desktop_visits_count ON user_daily_visits_agg_30d (desktop_visits_count);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_30d_mobile_visits_count ON user_daily_visits_agg_30d (mobile_visits_count);
 CREATE INDEX IF NOT EXISTS idx_user_daily_visits_agg_30d_other_visits_count ON user_daily_visits_agg_30d (other_visits_count);
 
