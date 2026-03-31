@@ -1,10 +1,14 @@
 # Tchap stats
 
+
 Ce projet permet de construire les tables dans : https://stats.tchap.incubateur.net/browse/2-tchap-stats
+
 
 ## Descriptions des tables et vues créées par ces scripts
 
 ## données brutes
+Les données brutes sont extraites depuis ce projet : https://github.com/tchapgouv/tchap-infra/tree/master/ansible/roles/matrix-synapse-stats/templates/views
+
 Viennent des exports des base de données de Tchap
 * user_daily_visits : données globales de toutes les visites des utilisateurs avec leur type d'appareil. aggrégé par jour. 68 milliard de lignes
 * subscriptions_aggregate : données des nouvelles inscriptions
