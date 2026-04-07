@@ -1,6 +1,7 @@
 /*
    vue matérialisée qui agrege les données de user_daily_visits par utilisateur, par jour sur les 30 derniers jours
 */
+/* DROP MATERIALIZED VIEW IF EXISTS user_daily_visits_agg_30d_v2; */
 SET work_mem = '2GB'; -- Ajustez selon la quantité de RAM disponible
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS user_daily_visits_agg_30d_v2 AS
@@ -18,6 +19,10 @@ SELECT
     WHEN platform = 'Mobile' THEN 1
     ELSE NULL
   END) AS mobile_visits_count,
+  COUNT(CASE
+    WHEN platform = 'Desktop' THEN 1
+    ELSE NULL
+  END) AS desktop_visits_count,
   COUNT(CASE
     WHEN platform = 'Autre' THEN 1
     ELSE NULL

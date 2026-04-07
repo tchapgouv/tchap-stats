@@ -31,6 +31,9 @@ BEGIN
                 WHEN user_agent LIKE 'Riot%Android' THEN 'Mobile'
                 WHEN user_agent LIKE 'Element%Android' THEN 'Mobile'
                 WHEN user_agent LIKE 'Element%iOS' THEN 'Mobile'
+                WHEN user_agent LIKE 'tchap-windows%' THEN 'Desktop'
+                WHEN user_agent LIKE 'tchap-macos%' THEN 'Desktop'
+                WHEN user_agent LIKE 'tchap-linux%' THEN 'Desktop'
                 ELSE 'Autre'
             END,
             device_type = CASE
@@ -54,6 +57,9 @@ BEGIN
                 WHEN user_agent LIKE 'Tchap%iOS%' THEN 'Tchap iOS'
                 WHEN user_agent LIKE 'Riot%' THEN 'Element'
                 WHEN user_agent LIKE 'Element%' THEN 'Element'
+                WHEN user_agent LIKE 'tchap-windows%' THEN 'Tchap Windows'
+                WHEN user_agent LIKE 'tchap-macos%' THEN 'Tchap MacOS'
+                WHEN user_agent LIKE 'tchap-linux%' THEN 'Tchap Linux'
                 ELSE 'Autre'
             END
         WHERE ctid IN (SELECT ctid FROM batch);

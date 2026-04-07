@@ -26,7 +26,6 @@ Elles permettent d'aggréger les données selon une ou deux dimensions ce qui ac
 * user_daily_visits_agg_XXX : vue aggrégée par jour des utilisateurs actifs par leur type d'appareil (mobile ou web) sur une période de temps
   * user_daily_visits_agg_30d : les 30 derniers jours
   * user_daily_visits_agg_120d : les 120 derniers jours
-  * user_daily_visits_agg_1y : la derniere année
 * user_daily_visits_by_month_YY : vue aggrégée par mois des utilisateurs actifs par leur type d'appareil sur une période de temps. 1y
   * user_daily_visits_by_month_1y : la derniere année
   * user_daily_visits_by_month_18m : sur les 18 derniers mois
