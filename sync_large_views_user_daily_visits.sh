@@ -15,20 +15,6 @@ fi
 echo "Sync_views.sh"
 echo "Starting job. Should display 'Done' when done, if there were no errors."
 
-# not used, 6,6Go of data, deleted
-# echo "Recreate Materialized View :  
-# todo : remove code in 2025 september"
-# time psql -d $DATABASE_URL -f scripts/user_daily_visits_auser_daily_visits_agg_1ygg_1y.sql
-
-# echo "Recreate Materialized View : user_daily_visits_by_month_1y.sql "
-# deactivate because no need
-# todo : remove code in 2025 september
-# time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y.sql
-
-# echo "Recreate Materialized View : user_daily_visits_by_month_1y_v2.sql "
-# todo : remove code in 2025 september
-# time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y_v2.sql
-
 
 echo "Recreate Materialized View : user_daily_visits_by_month_1y_v3.sql "
 time psql -d $DATABASE_URL -f scripts/user_daily_visits_by_month_1y_v3.sql

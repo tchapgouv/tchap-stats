@@ -14,16 +14,8 @@ if [ -f .env ]; then
   source .env
 fi
 
-# echo "Recreate Materialized View : user_daily_visits_agg_30d "
-# todo : remove code in 2025 september
-# time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_30d.sql
-
 echo "Recreate Materialized View : user_daily_visits_agg_30d_v2 "
 time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_30d_v2.sql
-
-# echo "Recreate Materialized View : user_daily_visits_agg_120d "
-# todo : remove code in 2025 september
-# time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_120d.sql
 
 #echo "Recreate Materialized View : user_daily_visits_agg_120d_v2 "
 #time psql -d $DATABASE_URL -f scripts/user_daily_visits_agg_120d_v2.sql
