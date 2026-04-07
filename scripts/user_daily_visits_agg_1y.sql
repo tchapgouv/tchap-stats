@@ -40,10 +40,7 @@ SELECT
          user_agent NOT LIKE 'Riot%iOS' AND
          user_agent NOT LIKE 'Riot%Android' AND
          user_agent NOT LIKE 'Element%Android' AND
-         user_agent NOT LIKE 'Element%iOS' AND
-         user_agent NOT LIKE 'tchap-windows%' AND
-         user_agent NOT LIKE 'tchap-linux%' AND
-         user_agent NOT LIKE 'tchap-macos%' 
+         user_agent NOT LIKE 'Element%iOS'
     THEN 1
     ELSE NULL
   END) AS other_visits_count
