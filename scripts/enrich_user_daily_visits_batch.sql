@@ -60,6 +60,8 @@ BEGIN
                 WHEN user_agent LIKE 'tchap-windows%' THEN 'Tchap Windows'
                 WHEN user_agent LIKE 'tchap-macos%' THEN 'Tchap MacOS'
                 WHEN user_agent LIKE 'tchap-linux%' THEN 'Tchap Linux'
+                WHEN user_agent LIKE 'Tchap X%' THEN 'Tchap iOs X'
+                WHEN user_agent LIKE 'Tchap beta%' THEN 'Tchap Android X'
                 ELSE 'Autre'
             END
         WHERE ctid IN (SELECT ctid FROM batch);
